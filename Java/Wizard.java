@@ -11,6 +11,10 @@ public class Wizard {
     }
 
     public void setHp(int hp) {
+        // HP가 음수가 되는 상황에서는 대신 0을 설정 되도록 한다. (에러 아님)
+        if (hp < 0) {
+            this.hp = 0;
+        }
         this.hp = hp;
     }
 
@@ -19,6 +23,10 @@ public class Wizard {
     }
 
     public void setMp(int mp) {
+        // 마법사의 MP는 0 이상이어야 한다.
+        if (mp < 0) {
+            throw new IllegalArgumentException("정수값을 입력하세요.");
+        }
         this.mp = mp;
     }
 
@@ -35,6 +43,10 @@ public class Wizard {
     }
 
     public void setWand(Wand wand) {
+        // 마법사의 지팡이는 null 일 수 없다.
+        if (wand == null) {
+            throw new IllegalArgumentException("유효한 지팡이를 입력하세요.");
+        }
         this.wand = wand;
     }
 
