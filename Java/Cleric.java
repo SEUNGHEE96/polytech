@@ -1,22 +1,20 @@
 package com.example;
 
-import java.util.Random;
-
 public class Cleric {
 
     String name;
     int HP = 0;
     int MP = 0;
 
-    static final int maxHP = 50;
-    static final int maxMP = 10;
+    static final int MAX_HP = 50;
+    static final int MAX_MP = 10;
 
     Cleric(String name) {
-        this(name, maxHP, maxMP);
+        this(name, MAX_HP, MAX_MP);
     }
 
     Cleric(String name, int HP) {
-        this(name, HP, maxMP);
+        this(name, HP, MAX_MP);
     }
 
     Cleric(String name, int HP, int MP) {
@@ -26,20 +24,19 @@ public class Cleric {
     }
 
     void selfAid() {
-        this.MP -= 5;
-        this.HP = Cleric.maxHP;
+        MP -= 5;
+        HP = Cleric.MAX_HP;
     }
 
     int pray(int sec) {
         int answer;
-        int recovery = new Random().nextInt(3) + sec;
-        // int recovery = (int) (Math.random() * 3) + sec;
-        if (this.MP + recovery < Cleric.maxMP) {
+        int recovery = (int) (Math.random() * 3) + sec;
+        if (MP + recovery < Cleric.MAX_MP) {
             answer = recovery;
-            this.MP += recovery;
+            MP += recovery;
         } else {
-            answer = Cleric.maxMP - this.MP;
-            this.MP = Cleric.maxMP;
+            answer = Cleric.MAX_MP - MP;
+            MP = Cleric.MAX_MP;
         }
         return answer;
     }
