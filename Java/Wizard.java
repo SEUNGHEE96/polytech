@@ -14,8 +14,9 @@ public class Wizard {
         // HP가 음수가 되는 상황에서는 대신 0을 설정 되도록 한다. (에러 아님)
         if (hp < 0) {
             this.hp = 0;
+        } else {
+            this.hp = hp;
         }
-        this.hp = hp;
     }
 
     public int getMp() {
