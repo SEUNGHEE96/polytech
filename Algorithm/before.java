@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.Scanner;
 
-public class Algorithm {
+public class before {
 
     private static int a;
     private static int b;
