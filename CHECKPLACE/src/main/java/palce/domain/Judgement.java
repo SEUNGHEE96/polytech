@@ -2,6 +2,7 @@ package palce.domain;
 
 import palce.entity.ConstructionSite;
 import palce.entity.TreeShadow;
+
 import java.util.LinkedList;
 
 public class Judgement {
@@ -17,6 +18,7 @@ public class Judgement {
     enum Status {
         silent, noisy
     }
+
     //isSilent 메소드는 Judgement 클래스에서만 쓰이므로 private으로 선언
     private boolean isSilent(TreeShadow ts) {
         double leftside = Math.pow((ts.getX() - cs.getX()), 2);
@@ -30,11 +32,10 @@ public class Judgement {
             TreeShadow ts = treelist.get(i);
             if (isSilent(ts)) {
                 sb.append(Status.silent);
-                sb.append("\n");
-            } else {
+            } else if (!isSilent(ts)) {
                 sb.append(Status.noisy);
-                sb.append("\n");
             }
+            sb.append("\n");
         }
         return sb.toString();
     }
