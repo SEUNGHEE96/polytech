@@ -17,28 +17,18 @@ public class TreeShadow {
         this.constructionSite = constructionSite;
     }
 
+    //setter 메소드는 전부 지움!
+    //생성자로 인스턴스를 생성한 후에는 좌표값이 바뀌지 않는 것이 맞다고 생각하여 삭제
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public ConstructionSite getConstructionSite() {
         return constructionSite;
-    }
-
-    public void setConstructionSite(ConstructionSite constructionSite) {
-        this.constructionSite = constructionSite;
     }
 
     @Override
