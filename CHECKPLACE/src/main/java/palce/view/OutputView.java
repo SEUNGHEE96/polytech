@@ -2,7 +2,7 @@ package palce.view;
 
 public class OutputView {
 
-    public void printReulst(String result) {
+    public void printResult(String result) {
         System.out.println(result.trim());
     }
 
