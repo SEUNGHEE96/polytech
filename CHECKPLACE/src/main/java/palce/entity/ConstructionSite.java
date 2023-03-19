@@ -2,26 +2,13 @@ package palce.entity;
 
 import java.util.Objects;
 
-public class ConstructionSite {
+public class ConstructionSite extends Coordinate {
 
-    private int a;
-    private int b;
     private int R;
 
     public ConstructionSite(int a, int b, int R) {
-        this.a = a;
-        this.b = b;
+        super(a,b);
         this.R = R;
-    }
-
-    //setter 메소드는 전부 지움!
-    //생성자로 인스턴스를 생성한 후에는 좌표값이 바뀌지 않는 것이 맞다고 생각하여 삭제
-    public int getA() {
-        return a;
-    }
-
-    public int getB() {
-        return b;
     }
 
     public int getR() {
@@ -29,24 +16,23 @@ public class ConstructionSite {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ConstructionSite that)) return false;
-        return getA() == that.getA() && getB() == that.getB() && getR() == that.getR();
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getA(), getB(), getR());
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override
     public String toString() {
-        return "ConstructionSite{" +
-                "a=" + a +
-                ", b=" + b +
-                ", R=" + R +
-                '}';
+        return super.toString();
     }
 
 }
