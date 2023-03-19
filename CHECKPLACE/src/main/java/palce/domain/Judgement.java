@@ -1,7 +1,6 @@
 package palce.domain;
 
 import palce.entity.TreeShadow;
-
 import java.util.LinkedList;
 
 public class Judgement {
@@ -13,9 +12,9 @@ public class Judgement {
 
     public String judgeAllTrees(LinkedList<TreeShadow> treelist) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i< treelist.size(); i++) {
+        for (int i = 0; i < treelist.size(); i++) {
             TreeShadow ts = treelist.get(i);
-            if(isSilent(ts)){
+            if (isSilent(ts)) {
                 sb.append(Status.silent);
                 sb.append("\n");
             } else {
