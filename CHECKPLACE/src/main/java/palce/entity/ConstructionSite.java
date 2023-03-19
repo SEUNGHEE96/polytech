@@ -14,28 +14,18 @@ public class ConstructionSite {
         this.R = R;
     }
 
+    //setter 메소드는 전부 지움!
+    //생성자로 인스턴스를 생성한 후에는 좌표값이 바뀌지 않는 것이 맞다고 생각하여 삭제
     public int getA() {
         return a;
-    }
-
-    public void setA(int a) {
-        this.a = a;
     }
 
     public int getB() {
         return b;
     }
 
-    public void setB(int b) {
-        this.b = b;
-    }
-
     public int getR() {
         return R;
-    }
-
-    public void setR(int r) {
-        R = r;
     }
 
     @Override
