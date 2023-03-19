@@ -21,12 +21,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public LinkedList<TreeShadow> saveTreeShadow(int cnt, ConstructionSite cs) {
+    public LinkedList<TreeShadow> saveTreeShadow(int cnt) {
         LinkedList<TreeShadow> treelist = new LinkedList<>();
         for (int i = 0; i < cnt; i++) {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
-            treelist.add(new TreeShadow(x, y, cs));
+            treelist.add(new TreeShadow(x, y));
         }
         return treelist;
     }
