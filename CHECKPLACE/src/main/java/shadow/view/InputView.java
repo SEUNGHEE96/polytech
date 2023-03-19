@@ -1,7 +1,7 @@
-package palce.view;
+package shadow.view;
 
-import palce.entity.ConstructionSite;
-import palce.entity.TreeShadow;
+import shadow.entity.ConstructionSite;
+import shadow.entity.TreeShadow;
 
 import java.util.LinkedList;
 import java.util.Scanner;

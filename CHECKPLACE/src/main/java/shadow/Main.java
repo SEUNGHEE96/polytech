@@ -1,10 +1,10 @@
-package palce;
+package shadow;
 
-import palce.domain.Judgement;
-import palce.entity.ConstructionSite;
-import palce.entity.TreeShadow;
-import palce.view.InputView;
-import palce.view.OutputView;
+import shadow.domain.Judgement;
+import shadow.entity.ConstructionSite;
+import shadow.entity.TreeShadow;
+import shadow.view.InputView;
+import shadow.view.OutputView;
 
 import java.util.LinkedList;
 

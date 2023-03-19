@@ -1,6 +1,4 @@
-package palce.entity;
-
-import java.util.Objects;
+package shadow.entity;
 
 public class TreeShadow extends Coordinate{
 

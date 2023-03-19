@@ -1,4 +1,4 @@
-package palce.entity;
+package shadow.entity;
 
 public class Coordinate {
     //인터페이스 혹은 추상클래스로 선언하지 않은 이유 :

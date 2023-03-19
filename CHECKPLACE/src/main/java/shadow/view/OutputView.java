@@ -1,4 +1,4 @@
-package palce.view;
+package shadow.view;
 
 public class OutputView {
 
