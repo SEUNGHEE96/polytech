@@ -32,4 +32,7 @@ public class InputView {
         return treelist;
     }
 
+    //예외처리(유효 검사)를 만들고 싶었으나 적당한 케이스가 떠오르지 않음...ㅜㅜ
+    //Q. 예외처리는 보통 어디서 처리하는가? view? entity?
+
 }
