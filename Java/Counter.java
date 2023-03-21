@@ -1,22 +1,7 @@
 package com.example;
 
-public class Counter {
+public interface Counter {
+    
+    int count();
 
-    private int count = 0;
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public void increase() {
-        count++;
-    }
-
-    public void decrease() {
-        count--;
-    }
 }
