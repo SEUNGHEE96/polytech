@@ -12,7 +12,7 @@ public class DownCoutner {
         this.count = count;
     }
 
-    public void decrease() {
+    public void count() {
         count--;
     }
 
