@@ -1,23 +1,16 @@
 package thread;
 
 public class Counter {
-	int num = 0;
+	private long count = 0;
 	
-	public static void main(String args[]) throws InterruptedException{
-		Counter counter = new Counter();
-		for (int i=0; i<1000; i++) {
-			new Thread(() -> {
-				try {
-					Thread.sleep(10);
-					counter.num ++;
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}).start();
-		}
-		Thread.sleep(3000);
-		System.out.println(counter.num);
+	public synchronized void add(long i) {
+		System.out.println("더하기");
+		count += i;
 	}
-
+	
+	public synchronized void mul(long i) {
+		System.out.println("곱하기");
+		count *= i;
+	}
 }
           
