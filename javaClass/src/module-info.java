@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author DA
+ *
+ */
+module javaClass {
+}
