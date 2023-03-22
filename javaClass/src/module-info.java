@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author DA
- *
- */
-module javaClass {
-}
