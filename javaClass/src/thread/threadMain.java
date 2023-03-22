@@ -1,7 +1,7 @@
 package thread;
 
 public class threadMain {
-public static void main(String[] args) {
-	System.out.println("얍");
-}
+	public static void main(String[] args) {
+		System.out.println("얍");
+	}
 }
