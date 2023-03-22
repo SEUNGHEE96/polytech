@@ -11,10 +11,10 @@ public class CounterUpThread extends Thread {
 
 	public static void main(String args[]) {
 		CounterUpThread cut1 = new CounterUpThread();
-		cut1.run();
+		cut1.start();
 		CounterUpThread cut2 = new CounterUpThread();
-		cut2.run();
+		cut2.start();
 		CounterUpThread cut3 = new CounterUpThread();
-		cut3.run();
+		cut3.start();
 	}
 }
