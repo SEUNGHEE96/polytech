@@ -9,6 +9,7 @@ import entity.Loan;
 import entity.Member;
 import save.Exportlist;
 import view.InputView;
+import view.OutputView;
 
 public class Main {
 
@@ -21,13 +22,14 @@ public class Main {
 
 		// 뷰
 		InputView iv = new InputView();
+		// OutputView ov = new OutputView();
 
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			System.out.println(console.InputMessage.start.getValue());
 			int menu = sc.nextInt();
 			if (menu < 1 || menu > 3) {
-				System.out.println("잘못된 입력");
+				System.out.println(console.OutputMessage.wrongNumber.getValue());
 				continue;
 			}
 			if (menu == 1) {
@@ -35,6 +37,10 @@ public class Main {
 				while (true) {
 					System.out.println(console.InputMessage.member.getValue());
 					int memberMenu = sc.nextInt();
+					if (menu < 0 || menu > 5) {
+						System.out.println(console.OutputMessage.wrongNumber.getValue());
+						continue;
+					}
 					// 0. 뒤로
 					if (memberMenu == 0) {
 						break;
@@ -49,27 +55,27 @@ public class Main {
 						System.out.println(console.InputMessage.addMember.getValue());
 						Member mem = iv.newMember(0);
 						mm.addMember(mem);
-						System.out.println("등록이 완료되었습니다!");
+						System.out.println(console.OutputMessage.addMember.getValue());
 						continue;
 					}
 					// 3.회원 수정
 					if (memberMenu == 3) {
-						System.out.println("수정하고 싶은 회원의 id를 입력하세요");
+						System.out.println(console.InputMessage.editMember.getValue());
 						int id = sc.nextInt();
 						Member mem = iv.newMember(id);
 						mm.editMember(id, mem);
-						System.out.println("수정이 완료되었습니다!");
+						System.out.println(console.OutputMessage.editMember.getValue());
 						continue;
 					}
 					// 4.회원 삭제
 					if (memberMenu == 4) {
-						System.out.print("삭제하고 싶은 회원의 id를 입력하세요");
+						System.out.print(console.InputMessage.deleteMember.getValue());
 						int id = sc.nextInt();
 						boolean check = mm.deleteMember(id);
 						if (check) {
-							System.out.println("삭제가 완료되었습니다!");
+							System.out.println(console.OutputMessage.deleteMember.getValue());
 						} else if (!check) {
-							System.out.println("삭제할 회원이 없습니다!");
+							System.out.println(console.OutputMessage.failToDelete.getValue());
 						}
 						continue;
 					}
@@ -77,10 +83,10 @@ public class Main {
 					if (memberMenu == 5) {
 						boolean check = mm.rollbackDelete();
 						if (!check) {
-							System.out.println("취소할 삭제 내역이 없습니다");
+							System.out.println(console.OutputMessage.failToRollback.getValue());
 							continue;
 						}
-						System.out.println("삭제 취소 되었습니다");
+						System.out.println(console.OutputMessage.rollbackMember.getValue());
 						continue;
 					}
 				}
@@ -90,6 +96,10 @@ public class Main {
 				while (true) {
 					System.out.println(console.InputMessage.book.getValue());
 					int BookMenu = sc.nextInt();
+					if (menu < 0 || menu > 5) {
+						System.out.println(console.OutputMessage.wrongNumber.getValue());
+						continue;
+					}
 					// 0. 뒤로
 					if (BookMenu == 0) {
 						break;
@@ -106,20 +116,20 @@ public class Main {
 					}
 					// 3. 대출이력조회
 					if (BookMenu == 3) {
-						System.out.println("본인 이름을 입력하시오");
+						System.out.println(console.InputMessage.inputName.getValue());
 						String memberName = sc.next();
 						lm.searchLoanByName(memberName);
 						continue;
 					}
 					// 4. 대출신청
 					if (BookMenu == 4) {
-						System.out.println("본인 이름을 입력하시오");
+						System.out.println(console.InputMessage.inputName.getValue());
 						String memberName = sc.next();
 
-						System.out.println("대출 가능한 책 목록입니다");
+						System.out.println(console.OutputMessage.availablelist.getValue());
 						bm.searchBookByAvailable();
 
-						System.out.println("빌리고 싶은 책 이름을 입력하시오");
+						System.out.println(console.InputMessage.inputBookName.getValue());
 						String bookName = sc.next();
 
 						String loanDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
@@ -130,19 +140,19 @@ public class Main {
 					}
 					// 5. 연장신청
 					if (BookMenu == 5) {
-						System.out.println("본인 이름을 입력하시오");
+						System.out.println(console.InputMessage.inputName.getValue());
 						String memberName = sc.next();
 
-						System.out.println("연장 신청 가능 목록입니다");
+						System.out.println(console.OutputMessage.extendablelist.getValue());
 						lm.searchAvaliableRenew(memberName);
 
-						System.out.println("연장하고 싶은 책 이름을 입력하시오");
+						System.out.println(console.InputMessage.inputName.getValue());
 						String bookName = sc.next();
 
 						if (lm.extendLoan(memberName, bookName)) {
-							System.out.println("연장 되었습니다");
+							System.out.println(console.OutputMessage.extendBook.getValue());
 						} else {
-							System.out.println("연장할 책이 없습니다");
+							System.out.println(console.OutputMessage.failToExtend.getValue());
 						}
 						continue;
 					}
@@ -150,7 +160,7 @@ public class Main {
 			}
 			// 3. 종료
 			if (menu == 3) {
-				System.out.println("종료합니다");
+				System.out.println(console.OutputMessage.finishMain.getValue());
 				break;
 			}
 		}
