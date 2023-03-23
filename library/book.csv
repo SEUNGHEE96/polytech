@@ -1,0 +1,5 @@
+id,title,issueDate,returnStatus
+1,이것이 자바다,220420,true
+2,자바의 정석,230210,false
+3,이펙티브자바,210530,true
+4,객체지향설계,200123,false
