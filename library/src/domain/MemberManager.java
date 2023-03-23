@@ -25,10 +25,7 @@ public class MemberManager extends Manager<Member> {
 
 	// addMember(): 새로운 회원을 추가합니다.
 	public void addMember(Member member) {
-		int id = 0;
-		for (Member m : list) {
-			id = Math.max(id, m.getId() + 1);
-		}
+		int id = list.get(list.size() - 1).getId() + 1;
 		member.setId(id);
 		list.add(member);
 	}
