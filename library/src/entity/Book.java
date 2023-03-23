@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Objects;
 
-public class Book {
+public class Book implements Comparable<Book>{
 	int id; //id
 	String title; //제목
 	String issueDate; //출간일
@@ -44,9 +44,13 @@ public class Book {
 	public void setReturnStatus(boolean returnStatus) {
 		this.returnStatus = returnStatus;
 	}
-	
-	
-	
+
+	@Override
+	public int compareTo(Book o) {
+		 // 출간일을 기준으로 오름차순으로 정렬
+	    return this.issueDate.compareTo(o.issueDate);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, issueDate, returnStatus, title);
