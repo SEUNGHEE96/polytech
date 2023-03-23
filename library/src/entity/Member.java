@@ -1,18 +1,19 @@
 package entity;
 
-public class Member {
+public class Member implements Comparable<Member> {
+	
 	int id; // id
 	String name; // 이름
 	String joinDate; // 가입한 날짜
 	String address; // 주소
 	String phoneNumber; // 폰번호
 	String birthday; // 생일
-	int age; //나이
-	
+	int age; // 나이
+
 	public Member() {
-		
+
 	}
-	
+
 	public Member(int id, String name, String joinDate, String address, String phoneNumber, String birthday) {
 		super();
 		this.id = id;
@@ -78,6 +79,11 @@ public class Member {
 
 	public void setAge(String birthday) {
 		this.age = (2023 - Integer.parseInt(birthday.substring(0, 4)) + 1);
+	}
+
+	@Override
+	public int compareTo(Member m) {
+		return this.id - m.getId(); // id를 기준으로 오름차순 정렬
 	}
 
 	@Override

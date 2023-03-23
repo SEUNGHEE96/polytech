@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.Collections;
+
+import entity.Book;
 import entity.Member;
 
 public class MemberManager extends Manager<Member> {
@@ -10,6 +13,14 @@ public class MemberManager extends Manager<Member> {
 	public MemberManager() {
 		// Makelist 클래스의 memberlist 메서드를 호출하여 반환된 리스트를 list 필드에 할당합니다.
 		list = ml.memberlist();
+	}
+
+	@Override
+	public void printAllList() {
+		Collections.sort(list); // id 기준으로 정렬
+		for (Member m : list) {
+			System.out.println(m);
+		}
 	}
 
 	// addMember(): 새로운 회원을 추가합니다.
