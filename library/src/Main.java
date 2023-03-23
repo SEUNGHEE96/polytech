@@ -2,6 +2,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import console.InputMessage;
+import console.OutputMessage;
 import domain.BookManager;
 import domain.LoanManager;
 import domain.MemberManager;
@@ -9,7 +11,6 @@ import entity.Loan;
 import entity.Member;
 import save.Exportlist;
 import view.InputView;
-import view.OutputView;
 
 public class Main {
 
@@ -20,25 +21,24 @@ public class Main {
 		BookManager bm = new BookManager();
 		LoanManager lm = new LoanManager();
 
-		// 뷰
+		// 입력
 		InputView iv = new InputView();
-		// OutputView ov = new OutputView();
 
 		Scanner sc = new Scanner(System.in);
 		while (true) {
-			System.out.println(console.InputMessage.start.getValue());
+			System.out.println(InputMessage.start.getValue());
 			int menu = sc.nextInt();
 			if (menu < 1 || menu > 3) {
-				System.out.println(console.OutputMessage.wrongNumber.getValue());
+				System.out.println(OutputMessage.wrongNumber.getValue());
 				continue;
 			}
 			if (menu == 1) {
 				// 1. 회원관리
 				while (true) {
-					System.out.println(console.InputMessage.member.getValue());
+					System.out.println(InputMessage.member.getValue());
 					int memberMenu = sc.nextInt();
 					if (menu < 0 || menu > 5) {
-						System.out.println(console.OutputMessage.wrongNumber.getValue());
+						System.out.println(OutputMessage.wrongNumber.getValue());
 						continue;
 					}
 					// 0. 뒤로
@@ -52,30 +52,30 @@ public class Main {
 					}
 					// 2.회원 등록
 					if (memberMenu == 2) {
-						System.out.println(console.InputMessage.addMember.getValue());
+						System.out.println(InputMessage.addMember.getValue());
 						Member mem = iv.newMember(0);
 						mm.addMember(mem);
-						System.out.println(console.OutputMessage.addMember.getValue());
+						System.out.println(OutputMessage.addMember.getValue());
 						continue;
 					}
 					// 3.회원 수정
 					if (memberMenu == 3) {
-						System.out.println(console.InputMessage.editMember.getValue());
+						System.out.println(InputMessage.editMember.getValue());
 						int id = sc.nextInt();
 						Member mem = iv.newMember(id);
 						mm.editMember(id, mem);
-						System.out.println(console.OutputMessage.editMember.getValue());
+						System.out.println(OutputMessage.editMember.getValue());
 						continue;
 					}
 					// 4.회원 삭제
 					if (memberMenu == 4) {
-						System.out.print(console.InputMessage.deleteMember.getValue());
+						System.out.print(InputMessage.deleteMember.getValue());
 						int id = sc.nextInt();
 						boolean check = mm.deleteMember(id);
 						if (check) {
-							System.out.println(console.OutputMessage.deleteMember.getValue());
+							System.out.println(OutputMessage.deleteMember.getValue());
 						} else if (!check) {
-							System.out.println(console.OutputMessage.failToDelete.getValue());
+							System.out.println(OutputMessage.failToDelete.getValue());
 						}
 						continue;
 					}
@@ -83,10 +83,10 @@ public class Main {
 					if (memberMenu == 5) {
 						boolean check = mm.rollbackDelete();
 						if (!check) {
-							System.out.println(console.OutputMessage.failToRollback.getValue());
+							System.out.println(OutputMessage.failToRollback.getValue());
 							continue;
 						}
-						System.out.println(console.OutputMessage.rollbackMember.getValue());
+						System.out.println(OutputMessage.rollbackMember.getValue());
 						continue;
 					}
 				}
@@ -94,10 +94,10 @@ public class Main {
 			// 2. 도서관리
 			if (menu == 2) {
 				while (true) {
-					System.out.println(console.InputMessage.book.getValue());
+					System.out.println(InputMessage.book.getValue());
 					int BookMenu = sc.nextInt();
 					if (menu < 0 || menu > 5) {
-						System.out.println(console.OutputMessage.wrongNumber.getValue());
+						System.out.println(OutputMessage.wrongNumber.getValue());
 						continue;
 					}
 					// 0. 뒤로
@@ -116,20 +116,20 @@ public class Main {
 					}
 					// 3. 대출이력조회
 					if (BookMenu == 3) {
-						System.out.println(console.InputMessage.inputName.getValue());
+						System.out.println(InputMessage.inputName.getValue());
 						String memberName = sc.next();
 						lm.searchLoanByName(memberName);
 						continue;
 					}
 					// 4. 대출신청
 					if (BookMenu == 4) {
-						System.out.println(console.InputMessage.inputName.getValue());
+						System.out.println(InputMessage.inputName.getValue());
 						String memberName = sc.next();
 
-						System.out.println(console.OutputMessage.availablelist.getValue());
+						System.out.println(OutputMessage.availablelist.getValue());
 						bm.searchBookByAvailable();
 
-						System.out.println(console.InputMessage.inputBookName.getValue());
+						System.out.println(InputMessage.inputBookName.getValue());
 						String bookName = sc.next();
 
 						String loanDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
@@ -140,19 +140,19 @@ public class Main {
 					}
 					// 5. 연장신청
 					if (BookMenu == 5) {
-						System.out.println(console.InputMessage.inputName.getValue());
+						System.out.println(InputMessage.inputName.getValue());
 						String memberName = sc.next();
 
-						System.out.println(console.OutputMessage.extendablelist.getValue());
+						System.out.println(OutputMessage.extendablelist.getValue());
 						lm.searchAvaliableRenew(memberName);
 
-						System.out.println(console.InputMessage.inputName.getValue());
+						System.out.println(InputMessage.inputBookName.getValue());
 						String bookName = sc.next();
 
 						if (lm.extendLoan(memberName, bookName)) {
-							System.out.println(console.OutputMessage.extendBook.getValue());
+							System.out.println(OutputMessage.extendBook.getValue());
 						} else {
-							System.out.println(console.OutputMessage.failToExtend.getValue());
+							System.out.println(OutputMessage.failToExtend.getValue());
 						}
 						continue;
 					}
@@ -160,7 +160,7 @@ public class Main {
 			}
 			// 3. 종료
 			if (menu == 3) {
-				System.out.println(console.OutputMessage.finishMain.getValue());
+				System.out.println(OutputMessage.finishMain.getValue());
 				break;
 			}
 		}
