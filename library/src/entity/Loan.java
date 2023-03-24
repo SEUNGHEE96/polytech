@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Objects;
 
-public class Loan {
+public class Loan implements Comparable<Loan>{
 	int id; // id
 	String memberName; // 회원이름
 	String bookTitle; // 책이름
@@ -82,9 +82,13 @@ public class Loan {
 	public void setExtension(boolean extension) {
 		this.extension = extension;
 	}
+	
+	@Override
+	public int compareTo(Loan l) {
+		//반납 기준으로 오름차순 정렬
+		return this.deadline - l.deadline;
+	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(bookTitle, deadline, extension, id, loanDate, memberName, renewStatus);

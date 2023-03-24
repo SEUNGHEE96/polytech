@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collections;
+
 import entity.Loan;
 
 public class LoanManager extends Manager<Loan> {
@@ -11,6 +13,7 @@ public class LoanManager extends Manager<Loan> {
 	
 	// searchLoanByName() : 대출이력조회
 	public void searchLoanByName(String name) {
+		Collections.sort(list);
 		for (Loan l : list) {
 			if(l.getMemberName().equals(name)) {
 				System.out.println(l);				

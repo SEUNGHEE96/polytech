@@ -47,7 +47,7 @@ public class Book implements Comparable<Book>{
 
 	@Override
 	public int compareTo(Book o) {
-		 // 출간일을 기준으로 오름차순으로 정렬
+		// 출간일을 기준으로 오름차순으로 정렬
 	    return this.issueDate.compareTo(o.issueDate);
 	}
 

@@ -83,8 +83,9 @@ public class Member implements Comparable<Member> {
 
 	@Override
 	public int compareTo(Member m) {
-		return this.id - m.getId(); // id를 기준으로 오름차순 정렬
-	}
+		//id를 기준으로 오름차순 정렬
+		return this.id - m.getId();
+	}		
 
 	@Override
 	public String toString() {
