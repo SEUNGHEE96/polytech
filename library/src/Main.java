@@ -148,7 +148,11 @@ public class Main {
 							System.out.println(OutputMessage.extendablelist.getValue());
 							System.out.println(InputMessage.inputBookName.getValue());
 							String bookName = sc.next();
-							lm.extendLoan(memberName, bookName);
+							if(lm.extendLoan(memberName, bookName)) {
+								System.out.println(OutputMessage.extendBook.getValue());
+							} else {
+								System.out.println(OutputMessage.failToExtend.getValue());
+							}
 						} else {
 							System.out.println(OutputMessage.unextendablelist.getValue());
 						}

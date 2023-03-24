@@ -41,14 +41,17 @@ public class LoanManager extends Manager<Loan> {
 	}
 	
 	// extendLoan() : 대출을 연장합니다.
-	public void extendLoan(String memberName, String bookName) {
+	public boolean extendLoan(String memberName, String bookName) {
+		boolean result = false;
 		for (Loan l : list) {
 			if (l.getMemberName().equals(memberName) && l.getBookTitle().equals(bookName)) {
+				result = true;
 				l.setExtension(true);
 				l.setDeadline(l.getDeadline() + 7);
 				break;
 			}
 		}
+		return result;
 	}
 
 }
