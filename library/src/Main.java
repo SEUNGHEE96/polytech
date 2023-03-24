@@ -144,8 +144,8 @@ public class Main {
 						System.out.println(InputMessage.inputName.getValue());
 						String memberName = sc.next();
 
-						System.out.println(OutputMessage.extendablelist.getValue());
 						if(lm.searchAvaliableRenew(memberName)) {
+							System.out.println(OutputMessage.extendablelist.getValue());
 							System.out.println(InputMessage.inputBookName.getValue());
 							String bookName = sc.next();
 							
