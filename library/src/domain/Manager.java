@@ -8,8 +8,6 @@ import view.InputView;
 
 public class Manager<E> {
 	
-	Scanner sc = new Scanner(System.in);
-	InputView iv = new InputView();
 	MakeList ml = new MakeList();
 	//각 Entity의 list
 	List<E> list;
