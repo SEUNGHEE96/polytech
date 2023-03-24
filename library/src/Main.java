@@ -136,6 +136,7 @@ public class Main {
 						Loan newLoan = new Loan(0, memberName, bookName, false, loanDate, 14, false);
 						lm.loanBook(newLoan);
 						bm.loanBook(bookName);
+						System.out.println(OutputMessage.loanBook.getValue());
 						continue;
 					}
 					// 5. 연장신청
@@ -144,15 +145,17 @@ public class Main {
 						String memberName = sc.next();
 
 						System.out.println(OutputMessage.extendablelist.getValue());
-						lm.searchAvaliableRenew(memberName);
-
-						System.out.println(InputMessage.inputBookName.getValue());
-						String bookName = sc.next();
-
-						if (lm.extendLoan(memberName, bookName)) {
-							System.out.println(OutputMessage.extendBook.getValue());
+						if(lm.searchAvaliableRenew(memberName)) {
+							System.out.println(InputMessage.inputBookName.getValue());
+							String bookName = sc.next();
+							
+							if (lm.extendLoan(memberName, bookName)) {
+								System.out.println(OutputMessage.extendBook.getValue());
+							} else {
+								System.out.println(OutputMessage.failToExtend.getValue());
+							}
 						} else {
-							System.out.println(OutputMessage.failToExtend.getValue());
+							System.out.println(OutputMessage.unextendablelist.getValue());
 						}
 						continue;
 					}

@@ -29,12 +29,15 @@ public class LoanManager extends Manager<Loan> {
 	}
 	
 	// searchAvaliableRenew() : 연장 가능한 책을 조회합니다.
-	public void searchAvaliableRenew(String name) {
+	public boolean searchAvaliableRenew(String name) {
+		boolean result = false;
 		for (Loan l : list) {
 			if (!l.isExtension() && l.getMemberName().equals(name) && !l.isRenewStatus()) {
+				result = true;
 				System.out.println(l);
 			}
 		}
+		return result;
 	}
 	
 	// extendLoan() : 대출을 연장합니다.

@@ -9,7 +9,9 @@ public enum OutputMessage {
 	rollbackMember("삭제 취소 되었습니다"),
 	failToRollback("취소할 삭제 내역이 없습니다"),
 	availablelist("대출 가능한 책 목록입니다"),
+	loanBook("대출 완료 되었습니다"),
 	extendablelist("연장 신청 가능 목록입니다"),
+	unextendablelist("연장 신청 가능한 목록이 없습니다."),
 	extendBook("연장 되었습니다"),
 	failToExtend("연장할 책이 없습니다"),
 	finishMain("종료합니다");
