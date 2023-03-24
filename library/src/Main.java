@@ -163,6 +163,7 @@ public class Main {
 			}
 		}
 		// 프로그램 종료시, 바뀐 데이터를 저장하고 마무리한다.
+		// 강제종료 시는 저장이 되지 않고, 3번 메뉴를 통해 정상 종료해야한다.
 		Exportlist el = new Exportlist();
 		el.exportBook(bm.getList());
 		el.exportMember(mm.getList());

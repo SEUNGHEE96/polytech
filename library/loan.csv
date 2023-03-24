@@ -3,3 +3,7 @@ id,memberName,bookTitle,renewStatus,loanDate,deadline,extension
 2,이지은,자바의 정석,false,230323,14,false
 3,조선혜,이펙티브자바,true,230320,63,true
 4,이승희,객체지향설계,false,2303020,24,true
+5,이승희,이런저런책,false,230323,14,false
+6,이승희,저런이런책,false,230323,14,false
+7,이승희,그런저런책,true,230323,14,true
+8,이승희,저런그런책,false,2303023,14,false
