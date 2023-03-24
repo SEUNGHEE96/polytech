@@ -37,7 +37,7 @@ public class Main {
 				while (true) {
 					System.out.println(InputMessage.member.getValue());
 					int memberMenu = sc.nextInt();
-					if (menu < 0 || menu > 5) {
+					if (memberMenu < 0 || memberMenu > 5) {
 						System.out.println(OutputMessage.wrongNumber.getValue());
 						continue;
 					}
@@ -96,7 +96,7 @@ public class Main {
 				while (true) {
 					System.out.println(InputMessage.book.getValue());
 					int BookMenu = sc.nextInt();
-					if (menu < 0 || menu > 5) {
+					if (BookMenu < 0 || BookMenu > 5) {
 						System.out.println(OutputMessage.wrongNumber.getValue());
 						continue;
 					}
