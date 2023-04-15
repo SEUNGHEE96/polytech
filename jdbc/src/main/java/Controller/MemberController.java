@@ -13,7 +13,7 @@ public class MemberController {
 	private MemberServiceImpl ms = new MemberServiceImpl();
 	private MemberView mv = new MemberView();
 
-	// 0. loginMember() : 회원 로그인
+	// 1. loginMember() : 회원 로그인 (이름과 생년월일)
 	public MemberDTO loginMember() {
 		MemberDTO dto = ms.loginMember(mv.inputName(), mv.inputBirthday());
 		if (dto == null) {
@@ -25,7 +25,7 @@ public class MemberController {
 		//Controller는 가급적 void로 만들려고 했으나, Main 반복문을 위해 DTO 반환
 	}
 	
-	// 1. selectAll() : 모든 회원 조회
+	// 2. selectAll() : 모든 회원 조회
 	public void selectAll() {
 		List<MemberDTO> list = ms.selectAll();
 		for(MemberDTO m : list) {
@@ -33,7 +33,7 @@ public class MemberController {
 		}
 	}
 	
-	// 2. addMember() : 회원 추가
+	// 3. addMember() : 회원 등록
 	public void addMember() {
 		System.out.println(InputMessage.addMember.getValue());
 		List<String> member = mv.inputMember();
@@ -45,7 +45,7 @@ public class MemberController {
 		}
 	}
 	
-	// 3. updateMember() : 회원 수정
+	// 4. updateMember() : 회원 수정
 	public void updateMember(int id) {
 		List<String> updateContents = mv.updateMember();
 		int cnt = ms.updateMember(updateContents, id);
@@ -56,7 +56,7 @@ public class MemberController {
 		}
 	}
 	
-	// 4. deleteMember() : 회원 삭제
+	// 5. deleteMember() : 회원 삭제
 	public void deleteMember() {
 		String name = mv.inputName();
 		int cnt = ms.deleteMember(name);
@@ -67,7 +67,7 @@ public class MemberController {
 		}
 	}
 	
-	// 5. rollbackDelete() : 삭제 취소
+	// 6. rollbackDelete() : 회원 삭제 취소
 	public void rollbackDelete() {
 		int cnt = ms.rollbackDelete();
 		if (cnt > 0) {

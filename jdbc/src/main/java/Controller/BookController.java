@@ -11,7 +11,7 @@ public class BookController {
 	private BookServiceImpl bs = new BookServiceImpl();
 	private BookView bv = new BookView();
 	
-	// 1. selectAll() : 모든 회원 조회
+	// 1. selectAll() : 모든 도서 조회
 	public void selectAll() {
 		List<BookDTO> list = bs.selectAll();
 		for(BookDTO b : list) {
@@ -19,7 +19,7 @@ public class BookController {
 		}
 	}
 	
-	// 2. addBook() : 도서 추가
+	// 2. addBook() : 도서 등록
 	public void addBook() {
 		System.out.println("등록할 도서 정보를 입력하세요");
 		int cnt = bs.addBook(bv.inputTitle(), bv.inputIssueDate());
@@ -30,7 +30,7 @@ public class BookController {
 		}
 	}
 	
-	// 3. searchBookByAvailable() : 대출 가능한 책을 조회합니다.
+	// 3. selectBookByAvailable() : 대출 가능한 도서 조회
 	public void selectBookByAvailable() {
 		List<BookDTO> list = bs.selectBookByAvailable();
 		for(BookDTO b : list) {

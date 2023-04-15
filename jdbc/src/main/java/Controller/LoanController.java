@@ -11,7 +11,7 @@ public class LoanController {
 	private LoanServiceImpl ls = new LoanServiceImpl();
 	private LoanView lv = new LoanView();
 	
-	// 1. getLoanHistory(): 로그인한 회원의 대출 이력을 조회합니다.
+	// 1. getLoanHistory(): 로그인한 회원의 대출 내역
 	public void getLoanHistory(int id) {
 		List<LoanDTO> list = ls.getLoanHistory(id);
 		for(LoanDTO b : list) {
@@ -19,7 +19,7 @@ public class LoanController {
 		}
 	}
 	
-	// 2. addLoan() : 도서를 대출합니다.
+	// 2. addLoan(): 도서 대출
 	public void addLoan(int id) {
 		System.out.println("대출 할 도서 정보를 입력하세요");
 		int cnt = ls.addLoan(id, lv.inputTitle());
@@ -41,7 +41,7 @@ public class LoanController {
 		}
 	}
 	
-	// 4. renewableList() : 연장 가능한 책을 조회합니다.
+	// 4. renewableList() : 연장 가능한 도서 조회
 	public void renewableList(int id) {
 		System.out.println("나의 현재 대출 내역입니다.");
 		List<LoanDTO> list = ls.renewableList(id);
@@ -50,7 +50,7 @@ public class LoanController {
 		}
 	}
 	
-	// 5. extendLoan() : 대출을 연장합니다.
+	// 5. extendLoan() : 대출 연장
 	public void extendLoan(int id) {
 		String title = lv.inputTitle();
 		int cnt = ls.extendLoan(id, title);
