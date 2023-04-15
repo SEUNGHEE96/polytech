@@ -1,18 +1,19 @@
-package entity;
+package dto;
 
+import java.util.Date;
 import java.util.Objects;
 
-public class Book implements Comparable<Book>{
+public class BookDTO implements Comparable<BookDTO>{
 	int id; //id
 	String title; //제목
-	String issueDate; //출간일
+	Date issueDate; //출간일
 	boolean returnStatus; //반납여부
 	
-	public Book () {
+	public BookDTO () {
 		
 	}
 	
-	public Book(int id, String title, String issueDate, boolean returnStatus) {
+	public BookDTO(int id, String title, Date issueDate, boolean returnStatus) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -23,30 +24,37 @@ public class Book implements Comparable<Book>{
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getIssueDate() {
+	
+	public Date getIssueDate() {
 		return issueDate;
 	}
-	public void setIssueDate(String issueDate) {
+
+	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
+	
 	public boolean isReturnStatus() {
 		return returnStatus;
 	}
+	
 	public void setReturnStatus(boolean returnStatus) {
 		this.returnStatus = returnStatus;
 	}
 
 	@Override
-	public int compareTo(Book o) {
+	public int compareTo(BookDTO o) {
 		// 출간일을 기준으로 오름차순으로 정렬
 	    return this.issueDate.compareTo(o.issueDate);
 	}
@@ -63,7 +71,7 @@ public class Book implements Comparable<Book>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Book other = (Book) obj;
+		BookDTO other = (BookDTO) obj;
 		return id == other.id && Objects.equals(issueDate, other.issueDate) && returnStatus == other.returnStatus
 				&& Objects.equals(title, other.title);
 	}

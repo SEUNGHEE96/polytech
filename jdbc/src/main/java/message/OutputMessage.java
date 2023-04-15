@@ -1,4 +1,4 @@
-package console;
+package message;
 
 public enum OutputMessage {
 	wrongNumber("잘못된 입력입니다"),

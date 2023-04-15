@@ -1,4 +1,4 @@
-package console;
+package message;
 
 public enum ErrorMessage {
 
