@@ -11,11 +11,12 @@ import java.util.List;
 import dao.LoanDAO;
 import dto.LoanDTO;
 
-public class LoanServiceImpl {
+public class LoanServiceImpl implements LoanService {
 	
 	private LoanDAO ld = new LoanDAO();
 	
 	// 1. getLoanHistory(): 대출 가능한 책을 조회합니다.
+	@Override
 	public List<LoanDTO> getLoanHistory(int id) {
 		Connection conn = getConnection();
 		List<LoanDTO> list = ld.getLoanHistory(conn, id);
@@ -24,6 +25,7 @@ public class LoanServiceImpl {
 	}
 	
 	// 2. addLoan(): 도서를 대출합니다.
+	@Override
 	public int addLoan(int id, String title) {
 		Connection conn = getConnection();
 		int result = ld.addLoan(conn, id, title);
@@ -37,6 +39,7 @@ public class LoanServiceImpl {
 	}
 	
 	// 3. returnBook() : 도서 반납
+	@Override
 	public int returnBook(int id, String title) {
 		Connection conn = getConnection();
 		int result = ld.returnBook(conn, id, title);
@@ -50,6 +53,7 @@ public class LoanServiceImpl {
 	}
 	
 	// 4. renewableList() : 연장 가능한 책을 조회합니다.
+	@Override
 	public List<LoanDTO> renewableList(int id) {
 		Connection conn = getConnection();
 		List<LoanDTO> list = ld.renewableList(conn, id);

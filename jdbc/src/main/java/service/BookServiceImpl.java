@@ -11,11 +11,12 @@ import java.util.List;
 import dao.BookDAO;
 import dto.BookDTO;
 
-public class BookServiceImpl {
+public class BookServiceImpl implements BookService{
 	
 	private BookDAO bd = new BookDAO();
 	
 	// 1. selectAll() : 모든 회원 조회
+	@Override
 	public List<BookDTO> selectAll() {
 		Connection conn = getConnection();
 		List<BookDTO> list = bd.selectAll(conn);
@@ -24,6 +25,7 @@ public class BookServiceImpl {
 	}
 	
 	// 2. addBook() : 도서 등록
+	@Override
 	public int addBook(String title, String issueDate) {
 		Connection conn = getConnection();
 		int result = bd.addBook(conn, title, issueDate);
@@ -37,12 +39,12 @@ public class BookServiceImpl {
 	}
 	
 	// 3. selectBookByAvailable() : 대출 가능한 책을 조회합니다.
+	@Override
 	public List<BookDTO> selectBookByAvailable() {
 		Connection conn = getConnection();
 		List<BookDTO> list = bd.selectBookByAvailable(conn);
 		close(conn);
 		return list;
 	}
-	
 	
 }

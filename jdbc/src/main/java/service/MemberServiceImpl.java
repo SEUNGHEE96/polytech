@@ -8,13 +8,14 @@ import java.util.List;
 import dao.MemberDAO;
 import dto.MemberDTO;
 
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService{
 	
 	//삭제 취소용 Member 객체 저장
 	private MemberDTO forRollback = null;
 	private MemberDAO md = new MemberDAO();
 	
-	// loginMember() : 회원 로그인 (이름과 생년월일)
+	// 1. loginMember() : 회원 로그인 (이름과 생년월일)
+	@Override
 	public MemberDTO loginMember(String name, String birthday) {
 		Connection conn = getConnection();
 		MemberDTO dto = md.loginMember(conn, name, birthday);
@@ -22,7 +23,8 @@ public class MemberServiceImpl {
 		return dto;
 	}
 
-	// selectAll() : 모든 회원 조회
+	// 2. selectAll() : 모든 회원 조회
+	@Override
 	public List<MemberDTO> selectAll() {
 		Connection conn = getConnection();
 		List<MemberDTO> list = md.selectAll(conn);
@@ -30,7 +32,8 @@ public class MemberServiceImpl {
 		return list;
 	}
 
-	// addMember() : 회원 등록
+	// 3. addMember() : 회원 등록
+	@Override
 	public int addMember(List<String> member) {
 		Connection conn = getConnection();
 		int result = md.addMember(conn, member);
@@ -43,7 +46,8 @@ public class MemberServiceImpl {
 		return result;
 	}
 	
-	// updateMember() : 회원 수정
+	// 4. updateMember() : 회원 수정
+	@Override
 	public int updateMember(List<String> updateContents, int id) {
 		Connection conn = getConnection();
 		int result = md.updateMember(conn, updateContents, id);
@@ -56,7 +60,8 @@ public class MemberServiceImpl {
 		return result;
 	}
 	
-	// deleteMember() : 회원 삭제
+	// 5. deleteMember() : 회원 삭제
+	@Override
 	public int deleteMember(String name) {
 		Connection conn = getConnection();
 		int result = 0;
@@ -71,7 +76,8 @@ public class MemberServiceImpl {
 		return result;
 	}
 
-	// rollbackDelete() : 회원 삭제 취소
+	// 6. rollbackDelete() : 회원 삭제 취소
+	@Override
 	public int rollbackDelete() {
 		Connection conn = getConnection();
 		int result = 0;
