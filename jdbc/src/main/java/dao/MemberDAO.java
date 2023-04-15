@@ -15,7 +15,7 @@ import dto.MemberDTO;
 
 public class MemberDAO {
 
-	// loginMember() : 이름과 생년월일로 로그인합니다.
+	// 1. loginMember() : 회원 로그인 (이름과 생년월일)
 	public MemberDTO loginMember(Connection conn, String name, String birthday) {
 		MemberDTO dto = null;
 		PreparedStatement pt = null;
@@ -47,7 +47,7 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	// selectAll(): 모든 회원을 조회합니다.
+	// 2. selectAll() : 모든 회원 조회
 	public List<MemberDTO> selectAll(Connection conn) {
 		List<MemberDTO> list = new ArrayList<>();
 		Statement st = null;
@@ -78,7 +78,7 @@ public class MemberDAO {
 		return list;
 	}
 	
-	// addMember(): 새로운 회원을 추가합니다.
+	// 3. addMember() : 회원 등록
 	public int addMember(Connection conn, List<String> member) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -106,7 +106,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// updateMember() : 회원 정보 수정
+	// 4. updateMember() : 회원 수정
 	public int updateMember(Connection conn, List<String> updateContents, int id) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -135,7 +135,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// deleteMember(): 회원을 삭제합니다.
+	// 5. deleteMember() : 회원 삭제
 	public int deleteMember(Connection conn, String name) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -157,36 +157,8 @@ public class MemberDAO {
 		}
 		return result;
 	}
-
-	// saveMember() : 삭제취소 (추가사항) - 삭제 된 멤버 객체 저장용
-	public MemberDTO saveMember(Connection conn, String name) {
-		MemberDTO dto = null;
-		PreparedStatement pt = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM MEMBER WHERE NAME = ?";
-		try {
-			pt = conn.prepareStatement(sql);
-			pt.setString(1, name);
-			rs = pt.executeQuery();
-			if(rs.next()) {
-			MemberDTO m = new MemberDTO(rs.getInt("ID"),
-					              rs.getString("NAME"),
-					              rs.getDate("JOINDATE"),
-					              rs.getString("ADDRESS"),
-					              rs.getString("PHONENUMBER"),
-					              rs.getDate("BIRTHDAY"));
-			dto = m;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//해당 메소드는 deleteMember 메소드와 함께 쓰이므로 conn.close()를 실행하면
-		//java.sql.SQLRecoverableException: ORA-17008: 접속을 해제했습니다.
-		//해당 오류가 납니다. 따라서 커넥션을 해제하지 않고 유지합니다.
-		return dto;
-	}
 	
-	// rollbackdelete() : 삭제취소 (추가사항) - 재삽입용
+	// 6. rollbackDelete() : 회원 삭제 취소 (추가사항) - 재삽입용
 	public int rollbackDelete(Connection conn, MemberDTO forRollback) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -213,6 +185,34 @@ public class MemberDAO {
 			}
 		}
 		return result;
+	}
+	
+	// 7. saveMember() : 삭제 취소 (추가사항) - 삭제 된 멤버 객체 저장용
+	public MemberDTO saveMember(Connection conn, String name) {
+		MemberDTO dto = null;
+		PreparedStatement pt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MEMBER WHERE NAME = ?";
+		try {
+			pt = conn.prepareStatement(sql);
+			pt.setString(1, name);
+			rs = pt.executeQuery();
+			if(rs.next()) {
+				MemberDTO m = new MemberDTO(rs.getInt("ID"),
+						rs.getString("NAME"),
+						rs.getDate("JOINDATE"),
+						rs.getString("ADDRESS"),
+						rs.getString("PHONENUMBER"),
+						rs.getDate("BIRTHDAY"));
+				dto = m;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//해당 메소드는 deleteMember 메소드와 함께 쓰이므로 conn.close()를 실행하면
+		//java.sql.SQLRecoverableException: ORA-17008: 접속을 해제했습니다.
+		//해당 오류가 납니다. 따라서 커넥션을 해제하지 않고 유지합니다.
+		return dto;
 	}
 	
 }

@@ -15,7 +15,7 @@ public class BookServiceImpl implements BookService{
 	
 	private BookDAO bd = new BookDAO();
 	
-	// 1. selectAll() : 모든 회원 조회
+	// 1. selectAll() : 모든 도서 조회
 	@Override
 	public List<BookDTO> selectAll() {
 		Connection conn = getConnection();
@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService{
 		return result;
 	}
 	
-	// 3. selectBookByAvailable() : 대출 가능한 책을 조회합니다.
+	// 3. selectBookByAvailable() : 대출 가능한 도서 조회
 	@Override
 	public List<BookDTO> selectBookByAvailable() {
 		Connection conn = getConnection();

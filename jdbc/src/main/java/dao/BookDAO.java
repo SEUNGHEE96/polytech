@@ -14,11 +14,7 @@ import dto.BookDTO;
 
 public class BookDAO{
 	
-	// 1. 도서 전체 조회 (최근출간순)
-	// 2. 도서 등록
-	// 3. 대출 가능 도서 조회
-	
-	// 1. selectAll() : 모든 도서를 최근 출간 순으로 조회
+	// 1. selectAll() : 모든 도서 조회 (최근 출간 순)
 	public List<BookDTO> selectAll(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
 		Statement st = null;
@@ -47,7 +43,7 @@ public class BookDAO{
 		return list;
 	}
 	
-	// 2. addBook(): 새로운 책을 추가합니다.
+	// 2. addBook(): 도서 등록
 	public int addBook(Connection conn, String title, String issueDate) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -71,7 +67,7 @@ public class BookDAO{
 		return result;
 	}
 	
-	// 3. selectBookByAvailable(): 대출 가능한 책을 조회합니다.
+	// 3. selectBookByAvailable(): 대출 가능한 도서 조회
 	public List<BookDTO> selectBookByAvailable(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
 		Statement st = null;
@@ -99,16 +95,5 @@ public class BookDAO{
 		}
 		return list;
 	}
-
-	/*
-	// loanBook() : 반납 여부를 false로 바꿉니다.
-	public void loanBook(String name) {
-		for (BookDTO b : list) {
-			if (b.getTitle().equals(name)) {
-				b.setReturnStatus(false);
-			}
-		}
-	}
-	*/
 	
 }

@@ -13,7 +13,7 @@ import dto.LoanDTO;
 
 public class LoanDAO{
 	
-	// 1. getLoanHistory(): 로그인한 회원의 대출 이력을 조회합니다.
+	// 1. getLoanHistory(): 로그인한 회원의 대출 내역
 	public List<LoanDTO> getLoanHistory(Connection conn, int id) {
 		List<LoanDTO> list = new ArrayList<>();
 		PreparedStatement pt = null;
@@ -50,7 +50,7 @@ public class LoanDAO{
 		return list;
 	}
 	
-	// 2. addLoan(): 도서를 대출합니다.
+	// 2. addLoan(): 도서 대출
 	public int addLoan(Connection conn, int id, String title) {
 		PreparedStatement pt = null;
 		int result = 0;
@@ -100,7 +100,7 @@ public class LoanDAO{
 		return result;
 	}
 	
-	// 4. renewableList() : 연장 가능한 책을 조회합니다.
+	// 4. renewableList() : 연장 가능한 도서 조회
 	public List<LoanDTO> renewableList(Connection conn, int id) {
 		List<LoanDTO> list = new ArrayList<>();
 		PreparedStatement pt = null;
@@ -139,7 +139,7 @@ public class LoanDAO{
 		return list;
 	}
 	
-	// 5. extendLoan() : 대출을 연장합니다.
+	// 5. extendLoan() : 대출 연장
 	public int extendLoan(Connection conn, int id, String title) {
 		PreparedStatement pt = null;
 		int result = 0;
