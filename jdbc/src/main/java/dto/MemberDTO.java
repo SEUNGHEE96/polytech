@@ -33,12 +33,6 @@ public class MemberDTO implements Comparable<MemberDTO> {
 		birth.setTime(birthday);
 		// 생일이 오늘 이후인 경우 -1 해줍니다.
 		int age = now.get(Calendar.YEAR) - birth.get(Calendar.YEAR) + 1;
-		/*
-		 * LocalDate birth = birthday.toInstant() // Date -> Instant
-		 * .atZone(ZoneId.systemDefault()) // Instant -> ZonedDateTime .toLocalDate();
-		 * LocalDate now = LocalDate.now(); Period period = birth.until(now); int age =
-		 * period.getYears();
-		 */
 		this.age = age;
 	}
 
