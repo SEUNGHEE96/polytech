@@ -2,9 +2,6 @@ package dto;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Calendar;
 
 public class MemberDTO implements Comparable<MemberDTO> {

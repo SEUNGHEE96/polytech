@@ -8,7 +8,6 @@ import controller.LoanController;
 import controller.MemberController;
 import dto.MemberDTO;
 import message.InputMessage;
-import message.OutputMessage;
 
 public class App {
 
