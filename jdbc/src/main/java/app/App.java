@@ -3,6 +3,7 @@ package app;
 import java.util.Scanner;
 
 import controller.BookController;
+import controller.Controller;
 import controller.LoanController;
 import controller.MemberController;
 import dto.MemberDTO;
@@ -14,6 +15,8 @@ public class App {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
+		
+		Controller c = new Controller();
 		MemberController mc = new MemberController();
 		BookController bc = new BookController();
 		LoanController lc = new LoanController();
@@ -23,7 +26,7 @@ public class App {
 			System.out.println("1.로그인  2.종료");			
 			int loginMemberId = 0;
 			int start = sc.nextInt();
-			// 0. 회원 로그인
+			// 1. 로그인
 			if (start == 1) {
 				MemberDTO loginMember = mc.loginMember();
 				if (loginMember == null) {
@@ -33,9 +36,13 @@ public class App {
 					// 아래에서 자주 쓰이는 로그인한 회원의 ID 저장
 					loginMemberId = loginMember.getId();
 				}
-			// 종료
+			// 2. 종료
+			} else if (start == 2) {
+				c.wrongNumber();
+				continue;
+			// 그 외
 			} else {
-				System.out.println(OutputMessage.finishMain.getValue());
+				c.finishMain();
 				break;
 			}
 			
@@ -76,8 +83,9 @@ public class App {
 					if (memberMenu == 5) {
 						mc.rollbackDelete();
 						continue;
+					// 그 외
 					} else {
-						System.out.println(OutputMessage.wrongNumber.getValue());
+						mc.wrongNumber();
 						continue;
 					}
 				}
@@ -106,8 +114,9 @@ public class App {
 					if (BookMenu == 3) {
 						bc.selectBookByAvailable();
 						continue;
+					// 그 외
 					} else {
-						System.out.println(OutputMessage.wrongNumber.getValue());
+						bc.wrongNumber();
 						continue;
 					}
 				}
@@ -143,16 +152,21 @@ public class App {
 						lc.renewableList(loginMemberId);
 						lc.extendLoan(loginMemberId);
 						continue;
+					// 그 외
 					} else {
-						System.out.println(OutputMessage.wrongNumber.getValue());
+						lc.wrongNumber();
 						continue;
 					}
 				}
 			}
 			// 3. 종료
 			if (menu == 4) {
-				System.out.println(OutputMessage.finishMain.getValue());
+				c.finishMain();
 				break;
+			// 그 외
+			} else {
+				c.wrongNumber();
+				continue;
 			}
 		}
 	}

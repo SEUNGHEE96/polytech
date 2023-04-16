@@ -1,6 +1,7 @@
 package message;
 
 public enum InputMessage {
+	
 	start("1.회원관리  2.도서관리  3.대출관리  4.종료"),
     member("0.뒤로  1.회원전체조회  2.회원등록  3.정보수정  4.회원삭제  5.삭제취소"),
     book("0.뒤로  1.도서전체조회  2.도서등록  3.대출가능도서조회"),

@@ -1,4 +1,4 @@
-package service;
+package service.impl;
 
 import static jdbc.JDBCTemplate.*;
 
@@ -7,6 +7,7 @@ import java.util.List;
 
 import dao.MemberDAO;
 import dto.MemberDTO;
+import service.MemberService;
 
 public class MemberServiceImpl implements MemberService{
 	

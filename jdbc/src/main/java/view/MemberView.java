@@ -2,12 +2,10 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class MemberView {
+public class MemberView extends View{
 
-	Scanner sc = new Scanner(System.in);
-
+	// 입력
 	// 회원 이름 입력
 	public String inputName() {
 		System.out.print("이름 : ");
@@ -48,6 +46,7 @@ public class MemberView {
 		return member;
 	}
 	
+	// 회원 정보 수정 (하나의 정보만 입력)
 	public List<String> updateMember() {
 		List<String> updateContents = new ArrayList<>();
 		System.out.println("수정 할 정보를 선택해주세요.\r\n"

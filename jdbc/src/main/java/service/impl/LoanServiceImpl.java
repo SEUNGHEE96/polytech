@@ -1,4 +1,4 @@
-package service;
+package service.impl;
 
 import static jdbc.JDBCTemplate.close;
 import static jdbc.JDBCTemplate.commit;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import dao.LoanDAO;
 import dto.LoanDTO;
+import service.LoanService;
 
 public class LoanServiceImpl implements LoanService {
 	
