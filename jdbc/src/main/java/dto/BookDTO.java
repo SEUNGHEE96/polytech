@@ -1,5 +1,6 @@
 package dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -79,7 +80,9 @@ public class BookDTO implements Comparable<BookDTO> {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", issueDate=" + issueDate + ", returnStatus=" + returnStatus
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    String formattedissueDate = formatter.format(issueDate);
+		return "Book [id=" + id + ", title=" + title + ", issueDate=" + formattedissueDate + ", returnStatus=" + returnStatus
 				+ "]";
 	}
 

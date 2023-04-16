@@ -1,6 +1,7 @@
 package dto;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -108,8 +109,11 @@ public class MemberDTO implements Comparable<MemberDTO> {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", joinDate=" + joinDate + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + ", birthday=" + birthday + ", age=" + age + "]";
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    String formattedjoinDate = formatter.format(joinDate);
+	    String formattedbirthday = formatter.format(birthday);
+		return "Member [id=" + id + ", name=" + name + ", joinDate=" + formattedjoinDate + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", birthday=" + formattedbirthday + ", age=" + age + "]";
 	}
 
 }

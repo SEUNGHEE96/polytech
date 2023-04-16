@@ -1,5 +1,6 @@
 package dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -111,8 +112,10 @@ public class LoanDTO implements Comparable<LoanDTO> {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    String formattedloanDate = formatter.format(loanDate);
 		return "Loan [id=" + id + ", memberID=" + memberID + ", title=" + title + ", isReturned=" + isReturned
-				+ ", loanDate=" + loanDate + ", daysLeft=" + daysLeft + ", isRenewed=" + isRenewed + "]";
+				+ ", loanDate=" + formattedloanDate + ", daysLeft=" + daysLeft + ", isRenewed=" + isRenewed + "]";
 	}
 
 }
