@@ -10,25 +10,25 @@ public class MemberView extends View{
 	// 입력
 	// 회원 이름 입력
 	public String inputName() {
-		System.out.println(InputMessage.inputName.getValue());
+		System.out.print(InputMessage.inputName.getValue());
 		return sc.nextLine();
 	}
 
 	// 회원 주소 입력
 	public String inputAddress() {
-		System.out.println(InputMessage.inputAddress.getValue());
+		System.out.print(InputMessage.inputAddress.getValue());
 		return sc.nextLine();
 	}
 	
 	// 회원 전화번호 입력
 	public String inputPhone() {
-		System.out.println(InputMessage.inputPhone.getValue());
+		System.out.print(InputMessage.inputPhone.getValue());
 		return sc.nextLine();
 	}
 	
 	// 회원 생일 입력
 	public String inputBirthday() {
-		System.out.println(InputMessage.inputBirthday.getValue());
+		System.out.print(InputMessage.inputBirthday.getValue());
 		return sc.nextLine();
 	}
 	
