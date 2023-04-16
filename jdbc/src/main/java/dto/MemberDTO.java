@@ -112,8 +112,8 @@ public class MemberDTO implements Comparable<MemberDTO> {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 	    String formattedjoinDate = formatter.format(joinDate);
 	    String formattedbirthday = formatter.format(birthday);
-		return "Member [id=" + id + ", name=" + name + ", joinDate=" + formattedjoinDate + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + ", birthday=" + formattedbirthday + ", age=" + age + "]";
+		return "Member [이름=" + name + ", 가입일=" + formattedjoinDate + ", 주소=" + address
+				+ ", 연락처=" + phoneNumber + ", 생일=" + formattedbirthday + ", 나이=" + age + "]";
 	}
 
 }

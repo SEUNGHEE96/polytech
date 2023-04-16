@@ -82,7 +82,7 @@ public class BookDTO implements Comparable<BookDTO> {
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 	    String formattedissueDate = formatter.format(issueDate);
-		return "Book [id=" + id + ", title=" + title + ", issueDate=" + formattedissueDate + ", returnStatus=" + returnStatus
+		return "Book [제목=" + title + ", 발행일=" + formattedissueDate + ", 반납여부=" + returnStatus
 				+ "]";
 	}
 

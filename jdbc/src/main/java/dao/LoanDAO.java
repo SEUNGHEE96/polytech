@@ -19,7 +19,7 @@ public class LoanDAO {
 		PreparedStatement pt = null;
 		ResultSet rs = null;
 		String sql = "SELECT L.ID, L.MEMBERID, B.TITLE, L.ISRETURNED, L.LOANDATE, L.DAYSLEFT, L.ISRENEWED "
-				+ "FROM LOAN L INNER JOIN BOOK B " + "ON L.BOOKID = B.ID " + "WHERE MEMBERID = ?";
+				+ "FROM LOAN L INNER JOIN BOOK B " + "ON L.BOOKID = B.ID " + "WHERE MEMBERID = ? " + "ORDER BY L.DAYSLEFT";
 		try {
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, id);
@@ -49,7 +49,7 @@ public class LoanDAO {
 		PreparedStatement pt = null;
 		int result = 0;
 		String sql = "INSERT INTO LOAN(ID, MEMBERID, BOOKID, LOANDATE) "
-				+ "VALUES(LOAN_ID.NEXTVAL, ?, (SELECT ID FROM BOOK WHERE TITLE = ?) , TRUNC(SYSDATE));";
+				+ "VALUES(LOAN_ID.NEXTVAL, ?, (SELECT ID FROM BOOK WHERE TITLE = ?) , TRUNC(SYSDATE))";
 		try {
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, id);
