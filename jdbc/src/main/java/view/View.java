@@ -3,6 +3,8 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 
+import message.InputMessage;
+
 public class View {
 
 	// 공통된 메소드 모음(부모 클래스)
@@ -11,7 +13,7 @@ public class View {
 	// 입력
 	// 책 이름 입력
 	public String inputTitle() {
-		System.out.print("책 제목 : ");
+		System.out.print(InputMessage.inputTitle.getValue());
 		return sc.nextLine();
 	}
 
@@ -20,9 +22,9 @@ public class View {
 	public void successOrFail(int cnt, String method) {
 		System.out.print(method);
 		if (cnt > 0) {
-			System.out.println(" 성공 하였습니다.");
+			System.out.println(InputMessage.success.getValue());
 		} else {
-			System.out.println(" 실패 하였습니다.");
+			System.out.println(InputMessage.fail.getValue());
 		}
 	}
 

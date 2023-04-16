@@ -4,7 +4,7 @@ import java.util.List;
 
 import dto.MemberDTO;
 import service.impl.MemberServiceImpl;
-import message.InputMessage;
+import message.OutputMessage;
 import view.MemberView;
 
 public class MemberController extends Controller {
@@ -32,7 +32,7 @@ public class MemberController extends Controller {
 
 	// 3. addMember() : 회원 등록
 	public void addMember() {
-		System.out.println(InputMessage.addMember.getValue());
+		System.out.println(OutputMessage.addMember.getValue());
 		List<String> member = mv.inputMember();
 		int cnt = ms.addMember(member);
 		mv.successOrFail(cnt, "등록");
@@ -40,6 +40,7 @@ public class MemberController extends Controller {
 
 	// 4. updateMember() : 회원 수정
 	public void updateMember(int id) {
+		System.out.println(OutputMessage.updateMember.getValue());
 		List<String> updateContents = mv.updateMember();
 		int cnt = ms.updateMember(updateContents, id);
 		mv.successOrFail(cnt, "수정");
@@ -47,6 +48,7 @@ public class MemberController extends Controller {
 
 	// 5. deleteMember() : 회원 삭제
 	public void deleteMember() {
+		System.out.println(OutputMessage.deleteMember.getValue());
 		String name = mv.inputName();
 		int cnt = ms.deleteMember(name);
 		mv.successOrFail(cnt, "삭제");

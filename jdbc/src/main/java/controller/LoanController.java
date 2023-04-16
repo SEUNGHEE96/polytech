@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import dto.LoanDTO;
+import message.OutputMessage;
 import service.impl.LoanServiceImpl;
 import view.LoanView;
 
@@ -19,7 +20,7 @@ public class LoanController extends Controller {
 
 	// 2. addLoan(): 도서 대출
 	public void addLoan(int id) {
-		System.out.println("대출 할 도서 정보를 입력하세요");
+		System.out.println(OutputMessage.addLoan.getValue());
 		int cnt = ls.addLoan(id, lv.inputTitle());
 		lv.successOrFail(cnt, "대출");
 	}
@@ -33,7 +34,7 @@ public class LoanController extends Controller {
 
 	// 4. renewableList() : 연장 가능한 도서 조회
 	public void renewableList(int id) {
-		System.out.println("나의 현재 대출 내역입니다.");
+		System.out.println(OutputMessage.renewableList.getValue());
 		List<LoanDTO> list = ls.renewableList(id);
 		lv.printAll(list);
 	}

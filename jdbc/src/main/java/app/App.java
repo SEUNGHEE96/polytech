@@ -21,9 +21,9 @@ public class App {
 		BookController bc = new BookController();
 		LoanController lc = new LoanController();
 
-		System.out.println("도서관리 프로그램을 시작합니다.");
+		System.out.println(InputMessage.start.getValue());
 		while (true) {
-			System.out.println("1.로그인  2.종료");
+			System.out.println(InputMessage.login.getValue());
 			int loginMemberId = 0;
 			int start = sc.nextInt();
 			// 1. 로그인
@@ -47,7 +47,7 @@ public class App {
 			}
 
 			// 1.회원관리 2.도서관리 3.대출관리 4.종료
-			System.out.println(InputMessage.start.getValue());
+			System.out.println(InputMessage.menu.getValue());
 			int menu = sc.nextInt();
 			if (menu == 1) {
 				// 1. 회원관리

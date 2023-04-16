@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import dto.BookDTO;
+import message.OutputMessage;
 import service.impl.BookServiceImpl;
 import view.BookView;
 
@@ -19,13 +20,14 @@ public class BookController extends Controller {
 
 	// 2. addBook() : 도서 등록
 	public void addBook() {
-		System.out.println("등록할 도서 정보를 입력하세요");
+		System.out.println(OutputMessage.addBook.getValue());
 		int cnt = bs.addBook(bv.inputTitle(), bv.inputIssueDate());
 		bv.successOrFail(cnt, "등록");
 	}
 
 	// 3. selectBookByAvailable() : 대출 가능한 도서 조회
 	public void selectBookByAvailable() {
+		System.out.println(OutputMessage.selectBookByAvailable.getValue());
 		List<BookDTO> list = bs.selectBookByAvailable();
 		bv.printAll(list);
 	}
