@@ -115,7 +115,7 @@ public class LoanDTO implements Comparable<LoanDTO> {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 	    String formattedloanDate = formatter.format(loanDate);
 		return "Loan [책제목=" + title + ", 반납여부=" + isReturned
-				+ ", 반납일=" + formattedloanDate + ", 반납기한=" + daysLeft + "일, 연장여부=" + isRenewed + "]";
+				+ ", 대출일=" + formattedloanDate + ", 반납기한=" + daysLeft + "일, 연장여부=" + isRenewed + "]";
 	}
 
 }

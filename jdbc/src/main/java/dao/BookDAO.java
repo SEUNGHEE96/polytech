@@ -69,7 +69,7 @@ public class BookDAO {
 		List<BookDTO> list = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM BOOK WHERE RETURNSTATUS = 'N' ORDER BY ISSUEDATE DESC";
+		String sql = "SELECT * FROM BOOK WHERE RETURNSTATUS = 'Y' ORDER BY ISSUEDATE DESC";
 		try {
 			ps = conn.prepareStatement(sql);
 	        rs = ps.executeQuery();

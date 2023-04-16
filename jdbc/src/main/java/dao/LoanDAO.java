@@ -47,14 +47,19 @@ public class LoanDAO {
 	// 2. addLoan(): 도서 대출
 	public int addLoan(Connection conn, int id, String title) {
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		int result = 0;
 		String sql = "INSERT INTO LOAN(ID, MEMBERID, BOOKID, LOANDATE) "
 				+ "VALUES(LOAN_ID.NEXTVAL, ?, (SELECT ID FROM BOOK WHERE TITLE = ?) , TRUNC(SYSDATE))";
+		String sql2 = "UPDATE BOOK SET RETURNSTATUS = 'N' WHERE TITLE = ?";
 		try {
 			ps = conn.prepareStatement(sql);
+			ps2 = conn.prepareStatement(sql2);
 			ps.setInt(1, id);
 			ps.setString(2, title);
+			ps2.setString(1, title);
 
+			ps2.executeUpdate();
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
