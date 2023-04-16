@@ -20,7 +20,7 @@ public class App {
 		MemberController mc = new MemberController();
 		BookController bc = new BookController();
 		LoanController lc = new LoanController();
-		
+
 		System.out.println(InputMessage.start.getValue());
 		while (true) {
 			int loginMemberId = 0;
@@ -34,12 +34,11 @@ public class App {
 				if (loginMember == null) {
 					// 로그인에 실패하면 다시 로그인 시도
 					continue;
-				} else {
-					// 성공하면 자주 쓰이는 로그인한 회원의 ID 저장
-					loginMemberId = loginMember.getId();
 				}
+				// 성공하면 자주 쓰이는 로그인한 회원의 ID 저장
+				loginMemberId = loginMember.getId();
 				while (true) {
-					// 0.뒤로 1.회원관리 2.도서관리 3.대출관리
+					// 0.뒤로  1.회원관리  2.도서관리  3.대출관리
 					System.out.println(InputMessage.menu.getValue());
 					int menu = Integer.parseInt(sc.nextLine());
 					// 0. 뒤로
@@ -49,7 +48,7 @@ public class App {
 					// 1. 회원관리
 					if (menu == 1) {
 						while (true) {
-							// 0.뒤로 1.회원전체조회 2.회원등록 3.정보수정 4.회원삭제 5.삭제취소
+							// 0.뒤로  1.회원전체조회  2.회원등록  3.정보수정  4.회원삭제  5.삭제취소
 							System.out.println(InputMessage.member.getValue());
 							int memberMenu = Integer.parseInt(sc.nextLine());
 							// 0. 뒤로
@@ -80,7 +79,7 @@ public class App {
 							if (memberMenu == 5) {
 								mc.rollbackDelete();
 								continue;
-							// 회원 관리 그 외
+								// 회원 관리 그 외
 							} else {
 								mc.wrongNumber();
 								continue;
@@ -90,7 +89,7 @@ public class App {
 					// 2. 도서관리
 					if (menu == 2) {
 						while (true) {
-							// 0.뒤로 1.도서전체조회 2.도서등록 3.대출가능도서조회
+							// 0.뒤로  1.도서전체조회  2.도서등록  3.대출가능도서조회
 							System.out.println(InputMessage.book.getValue());
 							int BookMenu = Integer.parseInt(sc.nextLine());
 							// 0. 뒤로
@@ -111,7 +110,7 @@ public class App {
 							if (BookMenu == 3) {
 								bc.selectBookByAvailable();
 								continue;
-							// 도서 관리 그 외
+								// 도서 관리 그 외
 							} else {
 								bc.wrongNumber();
 								continue;
@@ -121,7 +120,7 @@ public class App {
 					// 3. 대출 관리
 					if (menu == 3) {
 						while (true) {
-							// 0.뒤로 1.대출이력조회 2.도서대출 3.도서반납 4.도서연장
+							// 0.뒤로  1.대출이력조회  2.도서대출  3.도서반납  4.도서연장
 							System.out.println(InputMessage.loan.getValue());
 							int LoanMenu = Integer.parseInt(sc.nextLine());
 							// 0. 뒤로
@@ -149,23 +148,19 @@ public class App {
 								lc.renewableList(loginMemberId);
 								lc.extendLoan(loginMemberId);
 								continue;
-							// 대출 관리 그 외
+								// 대출 관리 그 외
 							} else {
 								lc.wrongNumber();
 								continue;
 							}
 						}
-					// 메인 메뉴 그 외
-					} else {
-						c.wrongNumber();
-						continue;
 					}
 				}
-			// 2. 종료
+				// 2. 종료
 			} else if (start == 2) {
 				c.finishMain();
 				break;
-			// 로그인 그 외
+				// 로그인 그 외
 			} else {
 				c.wrongNumber();
 				continue;
