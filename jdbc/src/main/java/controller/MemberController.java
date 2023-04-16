@@ -7,7 +7,7 @@ import service.impl.MemberServiceImpl;
 import message.InputMessage;
 import view.MemberView;
 
-public class MemberController extends Controller{
+public class MemberController extends Controller {
 
 	private MemberServiceImpl ms = new MemberServiceImpl();
 	private MemberView mv = new MemberView();

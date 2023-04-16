@@ -12,8 +12,8 @@ import java.util.List;
 
 import dto.BookDTO;
 
-public class BookDAO{
-	
+public class BookDAO {
+
 	// 1. selectAll() : 모든 도서 조회 (최근 출간 순)
 	public List<BookDTO> selectAll(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
@@ -23,12 +23,10 @@ public class BookDAO{
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
-			while(rs.next()) {
-				BookDTO b = new BookDTO(rs.getInt("ID"), 
-									rs.getString("TITLE"), 
-									rs.getDate("ISSUEDATE"),
-			                        rs.getString("RETURNSTATUS").equals("Y") ? true : false);
-			list.add(b);
+			while (rs.next()) {
+				BookDTO b = new BookDTO(rs.getInt("ID"), rs.getString("TITLE"), rs.getDate("ISSUEDATE"),
+						rs.getString("RETURNSTATUS").equals("Y") ? true : false);
+				list.add(b);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +40,7 @@ public class BookDAO{
 		}
 		return list;
 	}
-	
+
 	// 2. addBook(): 도서 등록
 	public int addBook(Connection conn, String title, String issueDate) {
 		PreparedStatement pt = null;
@@ -53,7 +51,7 @@ public class BookDAO{
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, title);
 			pt.setString(2, issueDate);
-			
+
 			result = pt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,7 +64,7 @@ public class BookDAO{
 		}
 		return result;
 	}
-	
+
 	// 3. selectBookByAvailable(): 대출 가능한 도서 조회
 	public List<BookDTO> selectBookByAvailable(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
@@ -76,12 +74,10 @@ public class BookDAO{
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
-			while(rs.next()) {
-				BookDTO b = new BookDTO(rs.getInt("ID"), 
-									rs.getString("TITLE"), 
-									rs.getDate("ISSUEDATE"),
-			                        rs.getString("RETURNSTATUS").equals("Y") ? true : false);
-			list.add(b);
+			while (rs.next()) {
+				BookDTO b = new BookDTO(rs.getInt("ID"), rs.getString("TITLE"), rs.getDate("ISSUEDATE"),
+						rs.getString("RETURNSTATUS").equals("Y") ? true : false);
+				list.add(b);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,5 +91,5 @@ public class BookDAO{
 		}
 		return list;
 	}
-	
+
 }

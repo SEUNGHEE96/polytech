@@ -13,9 +13,9 @@ import dto.LoanDTO;
 import service.LoanService;
 
 public class LoanServiceImpl implements LoanService {
-	
+
 	private LoanDAO ld = new LoanDAO();
-	
+
 	// 1. getLoanHistory(): 로그인한 회원의 대출 내역
 	@Override
 	public List<LoanDTO> getLoanHistory(int id) {
@@ -24,7 +24,7 @@ public class LoanServiceImpl implements LoanService {
 		close(conn);
 		return list;
 	}
-	
+
 	// 2. addLoan(): 도서 대출
 	@Override
 	public int addLoan(int id, String title) {
@@ -38,7 +38,7 @@ public class LoanServiceImpl implements LoanService {
 		close(conn);
 		return result;
 	}
-	
+
 	// 3. returnBook() : 도서 반납
 	@Override
 	public int returnBook(int id, String title) {
@@ -52,7 +52,7 @@ public class LoanServiceImpl implements LoanService {
 		close(conn);
 		return result;
 	}
-	
+
 	// 4. renewableList() : 연장 가능한 도서 조회
 	@Override
 	public List<LoanDTO> renewableList(int id) {
@@ -61,7 +61,7 @@ public class LoanServiceImpl implements LoanService {
 		close(conn);
 		return list;
 	}
-	
+
 	// 5. extendLoan() : 대출 연장
 	public int extendLoan(int id, String title) {
 		Connection conn = getConnection();
@@ -74,5 +74,5 @@ public class LoanServiceImpl implements LoanService {
 		close(conn);
 		return result;
 	}
-	
+
 }

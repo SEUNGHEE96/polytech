@@ -26,14 +26,10 @@ public class MemberDAO {
 			pt.setString(1, name);
 			pt.setString(2, birthday);
 			rs = pt.executeQuery();
-			if(rs.next()) {
-			MemberDTO m = new MemberDTO(rs.getInt("ID"),
-					              rs.getString("NAME"),
-					              rs.getDate("JOINDATE"),
-					              rs.getString("ADDRESS"),
-					              rs.getString("PHONENUMBER"),
-					              rs.getDate("BIRTHDAY"));
-			dto = m;
+			if (rs.next()) {
+				MemberDTO m = new MemberDTO(rs.getInt("ID"), rs.getString("NAME"), rs.getDate("JOINDATE"),
+						rs.getString("ADDRESS"), rs.getString("PHONENUMBER"), rs.getDate("BIRTHDAY"));
+				dto = m;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +42,7 @@ public class MemberDAO {
 		}
 		return dto;
 	}
-	
+
 	// 2. selectAll() : 모든 회원 조회
 	public List<MemberDTO> selectAll(Connection conn) {
 		List<MemberDTO> list = new ArrayList<>();
@@ -56,14 +52,10 @@ public class MemberDAO {
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
-			while(rs.next()) {
-			MemberDTO m = new MemberDTO(rs.getInt("ID"),
-					              rs.getString("NAME"),
-					              rs.getDate("JOINDATE"),
-					              rs.getString("ADDRESS"),
-					              rs.getString("PHONENUMBER"),
-					              rs.getDate("BIRTHDAY"));
-			list.add(m);
+			while (rs.next()) {
+				MemberDTO m = new MemberDTO(rs.getInt("ID"), rs.getString("NAME"), rs.getDate("JOINDATE"),
+						rs.getString("ADDRESS"), rs.getString("PHONENUMBER"), rs.getDate("BIRTHDAY"));
+				list.add(m);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,7 +69,7 @@ public class MemberDAO {
 		}
 		return list;
 	}
-	
+
 	// 3. addMember() : 회원 등록
 	public int addMember(Connection conn, List<String> member) {
 		PreparedStatement pt = null;
@@ -92,7 +84,7 @@ public class MemberDAO {
 			pt.setString(3, member.get(2));
 			pt.setString(4, member.get(3));
 			pt.setString(5, member.get(3));
-			
+
 			result = pt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,16 +104,16 @@ public class MemberDAO {
 		int result = 0;
 		String sql = null;
 		String menu = updateContents.get(0);
-		if(menu.equals("BIRTHDAY")) {
-	        sql = "UPDATE MEMBER SET BIRTHDAY = TO_DATE(?,'YYYY/MM/DD') WHERE ID = ?";
-	    } else {
-	        sql = "UPDATE MEMBER SET " + menu + " = ? WHERE ID = ?";
-	    }
+		if (menu.equals("BIRTHDAY")) {
+			sql = "UPDATE MEMBER SET BIRTHDAY = TO_DATE(?,'YYYY/MM/DD') WHERE ID = ?";
+		} else {
+			sql = "UPDATE MEMBER SET " + menu + " = ? WHERE ID = ?";
+		}
 		try {
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, updateContents.get(1));
 			pt.setInt(2, id);
-			
+
 			result = pt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,9 +135,9 @@ public class MemberDAO {
 		try {
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, name);
-			
+
 			result = pt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -157,7 +149,7 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	
+
 	// 6. rollbackDelete() : 회원 삭제 취소 (추가사항) - 재삽입용
 	public int rollbackDelete(Connection conn, MemberDTO forRollback) {
 		PreparedStatement pt = null;
@@ -173,7 +165,7 @@ public class MemberDAO {
 			pt.setString(5, forRollback.getPhoneNumber());
 			pt.setDate(6, forRollback.getBirthday());
 			pt.setInt(7, forRollback.getAge());
-			
+
 			result = pt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -186,7 +178,7 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	
+
 	// 7. saveMember() : 삭제 취소 (추가사항) - 삭제 된 멤버 객체 저장용
 	public MemberDTO saveMember(Connection conn, String name) {
 		MemberDTO dto = null;
@@ -197,22 +189,18 @@ public class MemberDAO {
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, name);
 			rs = pt.executeQuery();
-			if(rs.next()) {
-				MemberDTO m = new MemberDTO(rs.getInt("ID"),
-						rs.getString("NAME"),
-						rs.getDate("JOINDATE"),
-						rs.getString("ADDRESS"),
-						rs.getString("PHONENUMBER"),
-						rs.getDate("BIRTHDAY"));
+			if (rs.next()) {
+				MemberDTO m = new MemberDTO(rs.getInt("ID"), rs.getString("NAME"), rs.getDate("JOINDATE"),
+						rs.getString("ADDRESS"), rs.getString("PHONENUMBER"), rs.getDate("BIRTHDAY"));
 				dto = m;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//해당 메소드는 deleteMember 메소드와 함께 쓰이므로 conn.close()를 실행하면
-		//java.sql.SQLRecoverableException: ORA-17008: 접속을 해제했습니다.
-		//해당 오류가 납니다. 따라서 커넥션을 해제하지 않고 유지합니다.
+		// 해당 메소드는 deleteMember 메소드와 함께 쓰이므로 conn.close()를 실행하면
+		// java.sql.SQLRecoverableException: ORA-17008: 접속을 해제했습니다.
+		// 해당 오류가 납니다. 따라서 커넥션을 해제하지 않고 유지합니다.
 		return dto;
 	}
-	
+
 }

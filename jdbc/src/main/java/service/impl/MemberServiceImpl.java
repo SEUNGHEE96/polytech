@@ -9,12 +9,12 @@ import dao.MemberDAO;
 import dto.MemberDTO;
 import service.MemberService;
 
-public class MemberServiceImpl implements MemberService{
-	
-	//삭제 취소용 Member 객체 저장
+public class MemberServiceImpl implements MemberService {
+
+	// 삭제 취소용 Member 객체 저장
 	private MemberDTO forRollback = null;
 	private MemberDAO md = new MemberDAO();
-	
+
 	// 1. loginMember() : 회원 로그인 (이름과 생년월일)
 	@Override
 	public MemberDTO loginMember(String name, String birthday) {
@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
 		close(conn);
 		return result;
 	}
-	
+
 	// 4. updateMember() : 회원 수정
 	@Override
 	public int updateMember(List<String> updateContents, int id) {
@@ -60,14 +60,14 @@ public class MemberServiceImpl implements MemberService{
 		close(conn);
 		return result;
 	}
-	
+
 	// 5. deleteMember() : 회원 삭제
 	@Override
 	public int deleteMember(String name) {
 		Connection conn = getConnection();
 		int result = 0;
 		forRollback = md.saveMember(conn, name);
-		if(forRollback != null) {
+		if (forRollback != null) {
 			result = md.deleteMember(conn, name);
 			commit(conn);
 		} else {
@@ -91,10 +91,10 @@ public class MemberServiceImpl implements MemberService{
 				commit(conn);
 			} else {
 				rollback(conn);
-			}			
+			}
 		}
 		close(conn);
 		return result;
 	}
-	
+
 }

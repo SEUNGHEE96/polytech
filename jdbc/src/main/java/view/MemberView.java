@@ -20,7 +20,7 @@ public class MemberView extends View{
 	
 	// 회원 전화번호 입력
 	public String inputPhone() {
-		System.out.print("전화번호 입력 : ");
+		System.out.print("전화번호 입력 (010-1234-1234) : ");
 		return sc.nextLine();
 	}
 	

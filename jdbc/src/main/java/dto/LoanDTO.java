@@ -3,20 +3,21 @@ package dto;
 import java.util.Date;
 import java.util.Objects;
 
-public class LoanDTO implements Comparable<LoanDTO>{
+public class LoanDTO implements Comparable<LoanDTO> {
 	int id; // id
 	int memberID; // 회원ID (FK)
 	String title; // 책 제목 -책ID (FK)로 부터 읽어오는 것
 	boolean isReturned; // 반납여부
 	Date loanDate; // 대출일
 	int daysLeft; // 대출 만료일까지 남은 일 수
-	boolean isRenewed; //연장여부
-	
+	boolean isRenewed; // 연장여부
+
 	public LoanDTO() {
-		
+
 	}
-	
-	public LoanDTO(int id, int memberID, String title, boolean isReturned, Date loanDate, int daysLeft, boolean isRenewed) {
+
+	public LoanDTO(int id, int memberID, String title, boolean isReturned, Date loanDate, int daysLeft,
+			boolean isRenewed) {
 		super();
 		this.id = id;
 		this.memberID = memberID;
@@ -42,7 +43,7 @@ public class LoanDTO implements Comparable<LoanDTO>{
 	public void setMemberID(int memberID) {
 		this.memberID = memberID;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -85,7 +86,7 @@ public class LoanDTO implements Comparable<LoanDTO>{
 
 	@Override
 	public int compareTo(LoanDTO l) {
-		//반납 기준으로 오름차순 정렬
+		// 반납 기준으로 오름차순 정렬
 		return this.daysLeft - l.daysLeft;
 	}
 

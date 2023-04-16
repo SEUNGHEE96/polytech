@@ -28,7 +28,7 @@ public class View {
 
 	// 리스트 전부 출력
 	public void printAll(List<?> list) {
-		for(Object obj : list) {
+		for (Object obj : list) {
 			System.out.println(obj);
 		}
 	}

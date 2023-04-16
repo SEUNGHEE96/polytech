@@ -1,5 +1,5 @@
 package view;
 
-public class LoanView extends View{
-	
+public class LoanView extends View {
+
 }

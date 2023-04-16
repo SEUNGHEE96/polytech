@@ -12,10 +12,10 @@ import dao.BookDAO;
 import dto.BookDTO;
 import service.BookService;
 
-public class BookServiceImpl implements BookService{
-	
+public class BookServiceImpl implements BookService {
+
 	private BookDAO bd = new BookDAO();
-	
+
 	// 1. selectAll() : 모든 도서 조회
 	@Override
 	public List<BookDTO> selectAll() {
@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService{
 		close(conn);
 		return list;
 	}
-	
+
 	// 2. addBook() : 도서 등록
 	@Override
 	public int addBook(String title, String issueDate) {
@@ -38,7 +38,7 @@ public class BookServiceImpl implements BookService{
 		close(conn);
 		return result;
 	}
-	
+
 	// 3. selectBookByAvailable() : 대출 가능한 도서 조회
 	@Override
 	public List<BookDTO> selectBookByAvailable() {
@@ -47,5 +47,5 @@ public class BookServiceImpl implements BookService{
 		close(conn);
 		return list;
 	}
-	
+
 }
