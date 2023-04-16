@@ -16,15 +16,15 @@ public class LoanDAO {
 	// 1. getLoanHistory(): 로그인한 회원의 대출 내역
 	public List<LoanDTO> getLoanHistory(Connection conn, int id) {
 		List<LoanDTO> list = new ArrayList<>();
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT L.ID, L.MEMBERID, B.TITLE, L.ISRETURNED, L.LOANDATE, L.DAYSLEFT, L.ISRENEWED "
 				+ "FROM LOAN L INNER JOIN BOOK B " + "ON L.BOOKID = B.ID " + "WHERE MEMBERID = ? " + "ORDER BY L.DAYSLEFT";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setInt(1, id);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
 
-			rs = pt.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				LoanDTO l = new LoanDTO(rs.getInt("ID"), rs.getInt("MEMBERID"), rs.getString("TITLE"),
 						rs.getString("ISRETURNED").equals("Y") ? true : false, rs.getDate("LOANDATE"),
@@ -36,7 +36,7 @@ public class LoanDAO {
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 				close(rs);
 			} catch (SQLException e) {
 			}
@@ -46,22 +46,22 @@ public class LoanDAO {
 
 	// 2. addLoan(): 도서 대출
 	public int addLoan(Connection conn, int id, String title) {
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "INSERT INTO LOAN(ID, MEMBERID, BOOKID, LOANDATE) "
 				+ "VALUES(LOAN_ID.NEXTVAL, ?, (SELECT ID FROM BOOK WHERE TITLE = ?) , TRUNC(SYSDATE))";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setInt(1, id);
-			pt.setString(2, title);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.setString(2, title);
 
-			result = pt.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 			} catch (SQLException e) {
 			}
 		}
@@ -70,22 +70,22 @@ public class LoanDAO {
 
 	// 3. returnBook() : 도서 반납
 	public int returnBook(Connection conn, int id, String title) {
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "UPDATE LOAN SET ISRETURNED = 'Y' " + "WHERE BOOKID = (SELECT ID FROM BOOK WHERE TITLE = ?) "
 				+ "AND MEMBERID = ? " + "AND ISRETURNED = 'N'";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setString(1, title);
-			pt.setInt(2, id);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setInt(2, id);
 
-			result = pt.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 			} catch (SQLException e) {
 			}
 		}
@@ -95,16 +95,16 @@ public class LoanDAO {
 	// 4. renewableList() : 연장 가능한 도서 조회
 	public List<LoanDTO> renewableList(Connection conn, int id) {
 		List<LoanDTO> list = new ArrayList<>();
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT L.ID, L.MEMBERID, B.TITLE, L.ISRETURNED, L.LOANDATE, L.DAYSLEFT, L.ISRENEWED "
 				+ "FROM LOAN L INNER JOIN BOOK B " + "ON L.BOOKID = B.ID " + "WHERE MEMBERID = ? "
 				+ "AND ISRETURNED = 'N' " + "AND ISRENEWED = 'N'";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setInt(1, id);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
 
-			rs = pt.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				LoanDTO l = new LoanDTO(rs.getInt("ID"), rs.getInt("MEMBERID"), rs.getString("TITLE"),
 						rs.getString("ISRETURNED").equals("Y") ? true : false, rs.getDate("LOANDATE"),
@@ -116,7 +116,7 @@ public class LoanDAO {
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 				close(rs);
 			} catch (SQLException e) {
 			}
@@ -126,23 +126,23 @@ public class LoanDAO {
 
 	// 5. extendLoan() : 대출 연장
 	public int extendLoan(Connection conn, int id, String title) {
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "UPDATE LOAN " + "SET ISRENEWED = 'Y' , DAYSLEFT = DAYSLEFT + 7 "
 				+ "WHERE BOOKID = (SELECT ID FROM BOOK WHERE TITLE = ?) " + "AND MEMBERID = ? "
 				+ "AND ISRETURNED = 'N' " + "AND ISRENEWED = 'N'";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setString(1, title);
-			pt.setInt(2, id);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setInt(2, id);
 
-			result = pt.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 			} catch (SQLException e) {
 			}
 		}

@@ -17,12 +17,12 @@ public class BookDAO {
 	// 1. selectAll() : 모든 도서 조회 (최근 출간 순)
 	public List<BookDTO> selectAll(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
-		Statement st = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM BOOK ORDER BY ISSUEDATE DESC";
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			ps = conn.prepareStatement(sql);
+	        rs = ps.executeQuery();
 			while (rs.next()) {
 				BookDTO b = new BookDTO(rs.getInt("ID"), rs.getString("TITLE"), rs.getDate("ISSUEDATE"),
 						rs.getString("RETURNSTATUS").equals("Y") ? true : false);
@@ -33,7 +33,7 @@ public class BookDAO {
 		} finally {
 			try {
 				conn.close();
-				close(st);
+				close(ps);
 				close(rs);
 			} catch (SQLException e) {
 			}
@@ -43,22 +43,22 @@ public class BookDAO {
 
 	// 2. addBook(): 도서 등록
 	public int addBook(Connection conn, String title, String issueDate) {
-		PreparedStatement pt = null;
+		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "INSERT INTO BOOK(ID, TITLE, ISSUEDATE)\r\n"
 				+ "VALUES (BOOK_ID.NEXTVAL, ?, TO_DATE(?,'YYYY/MM/DD'))";
 		try {
-			pt = conn.prepareStatement(sql);
-			pt.setString(1, title);
-			pt.setString(2, issueDate);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, issueDate);
 
-			result = pt.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				conn.close();
-				close(pt);
+				close(ps);
 			} catch (SQLException e) {
 			}
 		}
@@ -68,12 +68,12 @@ public class BookDAO {
 	// 3. selectBookByAvailable(): 대출 가능한 도서 조회
 	public List<BookDTO> selectBookByAvailable(Connection conn) {
 		List<BookDTO> list = new ArrayList<>();
-		Statement st = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM BOOK WHERE RETURNSTATUS = 'N' ORDER BY ISSUEDATE DESC";
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery(sql);
+			ps = conn.prepareStatement(sql);
+	        rs = ps.executeQuery();
 			while (rs.next()) {
 				BookDTO b = new BookDTO(rs.getInt("ID"), rs.getString("TITLE"), rs.getDate("ISSUEDATE"),
 						rs.getString("RETURNSTATUS").equals("Y") ? true : false);
@@ -84,7 +84,7 @@ public class BookDAO {
 		} finally {
 			try {
 				conn.close();
-				close(st);
+				close(ps);
 				close(rs);
 			} catch (SQLException e) {
 			}
