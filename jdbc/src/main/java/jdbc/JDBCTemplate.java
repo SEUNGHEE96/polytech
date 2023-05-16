@@ -14,9 +14,9 @@ public class JDBCTemplate {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@dinkdb_high?TNS_ADMIN=C:\\SQLDEV\\Wallet_DinkDB";
-			String user = "DA2313";
-			String passwd = "Data2313";
+			String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink";
+			String user = "scott";
+			String passwd = "tiger";
 			conn = DriverManager.getConnection(url, user, passwd);
 
 			// 자동커밋 방지
