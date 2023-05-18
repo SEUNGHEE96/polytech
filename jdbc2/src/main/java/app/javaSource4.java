@@ -47,59 +47,58 @@ public class javaSource4 {
 	public static void empList(Connection conn) {
 		PreparedStatement ps = null;
 
-		int pageSize = 10000; // 한 번에 가져올 데이터 양
+		int fetchSize = 10000; // 한 번에 가져올 데이터 양
 		
 	    String sql = "CREATE OR REPLACE PROCEDURE INSERTBONUS2 IS "
+	    		// PL/SQL 컴포지트 데이터 유형을 정의
+	    		// bonus_record_t 레코드의 컬렉션 유형인 bonus_records_t를 정의
 	    		+ "    TYPE bonus_record_t IS RECORD ( "
 	    		+ "        v_empno NUMBER(4) "
 	    		+ "    ); "
-	    		//bonus_record_t라는 PL/SQL 컴포지트 데이터 유형을 정의\r\n
+	    		// 실제 데이터를 저장하는 변수 v_bonus_records를 선언
+	    		// 이 변수를 bonus_records_t 컬렉션 유형으로 지정
 	    		+ "    TYPE bonus_records_t IS TABLE OF bonus_record_t; "
 	    		+ "    v_bonus_records bonus_records_t; "
-	    		+ "    CURSOR c_bonus IS "
+	    		+ "     CURSOR c_emp IS "
+	    		+ "        SELECT EMPNO "
+	    		+ "        FROM EMP "
+	    		+ "        WHERE JOB NOT IN ('PRESIDENT', 'ANALYST'); "
+	    		+ "    CURSOR c_customer IS "
 	    		+ "        SELECT MGR_EMPNO "
-	    		+ "        FROM CUSTOMER "
-	    		+ "        WHERE MGR_EMPNO NOT IN (SELECT EMPNO FROM EMP WHERE JOB IN ('PRESIDENT', 'ANALYST')) "
-	    		+ "        GROUP BY MGR_EMPNO; "
+	    		+ "        FROM CUSTOMER; "
 	    		+ "    v_yyyymm VARCHAR2(6) := '202306'; "
 	    		+ "    v_empno NUMBER(4); "
 	    		+ "    v_bonus_sal NUMBER(4); "
 	    		+ "    v_count NUMBER(10); "
 	    		+ "BEGIN "
-	    		//FETCH 문에서는 BULK COLLECT INTO 구문을 사용하여 데이터를 한 번에 가져와 컬렉션에 저장 & FETCH SIZE = 10000
-	    		+ "    OPEN c_bonus; "
-	    		+ "    FETCH c_bonus BULK COLLECT INTO v_bonus_records LIMIT 10;"
-	    		+ "    CLOSE c_bonus; "
-	    		+ "    FOR i IN 1..v_bonus_records.COUNT LOOP "
-	    		+ "        v_empno := v_bonus_records(i).v_empno; "
-	    		//담당중인 고객 수를 반복문을 통해 COUNT"
+	    		// FETCH 문에서는 BULK COLLECT INTO 구문을 사용하여 데이터를 한 번에 가져와 컬렉션에 저장
+	    		+ "    OPEN c_customer; "
+	    		+ "    FETCH c_customer BULK COLLECT INTO v_bonus_records LIMIT " + fetchSize + "; "
+	    		+ "    FOR rec IN c_emp LOOP "
+	    		+ "        v_empno := rec.EMPNO; "
+	    		//담당중인 고객 수를 반복문을 통해 COUNT
 	    		+ "        v_count := 0; "
-	    		+ "    FOR inner_rec IN ( "
-	    		+ "        SELECT 1 "
-	    		+ "        FROM CUSTOMER "
-	    		+ "        WHERE MGR_EMPNO = v_bonus_records(i).v_empno "
-	    		+ "    ) LOOP "
+	    		+ "   FOR i IN 1..v_bonus_records.COUNT LOOP "
 	    		+ "        v_count := v_count + 1; "
 	    		+ "        END LOOP; "
-	    		//보너스를 COUNT한 고객 수 기준으로 결정
+	    		// 보너스를 COUNT한 고객 수 기준으로 결정
 	    		+ "        IF v_count > 100000 THEN "
 	    		+ "            v_bonus_sal := 2000; "
 	    		+ "        ELSE "
 	    		+ "            v_bonus_sal := 1000; "
 	    		+ "        END IF; "
-	    		//모두 정해진 BONUS를 INSERT를 통해 BONUS 테이블에 저장
+	    		// 모두 정해진 BONUS를 INSERT를 통해 BONUS 테이블에 저장
 	    		+ "        INSERT INTO BONUS(YYYYMM, EMPNO, BONUS_SAL) VALUES (v_yyyymm, v_empno, v_bonus_sal); "
 	    		+ "    END LOOP; "
+	    		+ "    CLOSE c_customer; "
 	    		+ "    COMMIT; "
 	    		+ "EXCEPTION "
 	    		+ "    WHEN OTHERS THEN "
 	    		+ "        ROLLBACK; "
-	    		+ "    RAISE; "
 	    		+ "END;";
 	    
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setFetchSize(pageSize);
 			ps.execute();
 			
 			try (CallableStatement statement = conn.prepareCall("{CALL INSERTBONUS2}")) {
