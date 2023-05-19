@@ -47,7 +47,7 @@ public class javaSource4 {
 	public static void empList(Connection conn) {
 		PreparedStatement ps = null;
 
-		int fetchSize = 10000; // 한 번에 가져올 데이터 양
+		int fetchSize = 1000; // 한 번에 가져올 데이터 양
 		
 	    String sql = "CREATE OR REPLACE PROCEDURE INSERTBONUS2 IS "
 	    		// PL/SQL 컴포지트 데이터 유형을 정의
