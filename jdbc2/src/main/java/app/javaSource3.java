@@ -64,8 +64,10 @@ public class javaSource3 {
 				+ "        v_empno := rec.EMPNO; "
 				//담당중인 고객 수를 반복문을 통해 COUNT
 				+ "        v_count := 0; "
-				+ "    FOR inner_rec IN c_customer LOOP "
-				+ "        v_count := v_count + 1; "
+				+ "        FOR inner_rec IN c_customer LOOP "
+				+ "            IF inner_rec.MGR_EMPNO = v_empno THEN "
+				+ "                v_count := v_count + 1; "
+				+ "            END IF; "
 				+ "        END LOOP; "
 				//보너스를 COUNT한 고객 수 기준으로 결정
 				+ "        IF v_count > 100000 THEN "
