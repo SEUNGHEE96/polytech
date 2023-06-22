@@ -21,20 +21,21 @@ public class JoinOk extends HttpServlet {
 	private String query;
 	private Connection conn;
 	private Statement stmt;
-	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public JoinOk() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JoinOk() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("doGet");
@@ -42,18 +43,21 @@ public class JoinOk extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
 		System.out.println("doPost");
 		actionDo(request, response);
 	}
 
-	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void actionDo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		name = request.getParameter("name");
 		id = request.getParameter("id");
 		pw = request.getParameter("pw");
@@ -62,21 +66,22 @@ public class JoinOk extends HttpServlet {
 		phone3 = request.getParameter("phone3");
 		gender = request.getParameter("gender");
 
-		query = "insert into member(name, id, pw, phone1, phone2, phone3, gender) values('" + name + "','" + id + "','" + pw + "','" + phone1 + "','" + phone2 + "','" + phone3 + "','" + gender + "')";
-		
+		query = "insert into member(name, id, pw, phone1, phone2, phone3, gender) values('" + name + "','" + id + "','"
+				+ pw + "','" + phone1 + "','" + phone2 + "','" + phone3 + "','" + gender + "')";
+
 		try {
 			String driver = "oracle.jdbc.driver.OracleDriver";
 			String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink13";
 			String user = "c##scott";
 			String passwd = "tiger";
 
-			Class.forName(driver);			
+			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, passwd);
 
 			stmt = conn.createStatement();
 			int iResult = stmt.executeUpdate(query);
-			
-			if( iResult == 1 ) {
+
+			if (iResult == 1) {
 				System.out.println("화원가입 완료");
 				System.out.println("id : " + id + "| pw : " + pw + "| name : " + name);
 				response.sendRedirect("joinResult.jsp");
@@ -84,14 +89,16 @@ public class JoinOk extends HttpServlet {
 				System.out.println("insert fail");
 				response.sendRedirect("join.html");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("join.html");
 		} finally {
 			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

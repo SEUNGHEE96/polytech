@@ -96,10 +96,12 @@
     <servlet-name>LoginOk</servlet-name>
     <servlet-class>join.LoginOk</servlet-class>
   </servlet>
+  <!-- 
   <servlet-mapping>
     <servlet-name>LoginOk</servlet-name>
     <url-pattern>/LoginOk</url-pattern>
   </servlet-mapping>
+   -->
   <servlet>
     <description></description>
     <display-name>ModifyOk</display-name>

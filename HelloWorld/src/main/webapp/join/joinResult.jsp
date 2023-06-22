@@ -29,18 +29,21 @@
 		
 		while(rs.next()) {
 			String id = rs.getString("id");
-			String pwd = rs.getString("pw");
+			String pw = rs.getString("pw");
 			String name = rs.getString("name");
-			String phone = rs.getString("phone");
+			String phone1 = rs.getString("phone1");
+			String phone2 = rs.getString("phone2");
+			String phone3 = rs.getString("phone3");
+			String gender = rs.getString("gender");
 			
-			out.println("id : " + id + "| pwd : " + pwd + "| name : " + name + "| phone : " + phone + "<br/>");
+			out.println("id : " + id + " | pw : " + pw + " | name : " + name + " | phone1 : " + phone1 + 
+					" | phone2 : " + phone2 + " | phone3 : " + phone3 + " | gender : " + gender + "<br/>");
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	} finally {
 		try {
 			conn.close();
-			//close(ps);
 		} catch (SQLException e) {
 		}
 	}
