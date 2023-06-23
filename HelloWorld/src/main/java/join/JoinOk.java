@@ -82,7 +82,7 @@ public class JoinOk extends HttpServlet {
 			int iResult = stmt.executeUpdate(query);
 
 			if (iResult == 1) {
-				System.out.println("화원가입 완료");
+				System.out.println("insert success");
 				System.out.println("id : " + id + "| pw : " + pw + "| name : " + name);
 				response.sendRedirect("joinResult.jsp");
 			} else {

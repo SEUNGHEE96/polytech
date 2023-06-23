@@ -5,9 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
@@ -16,7 +19,7 @@ import java.sql.Statement;
 @WebServlet("/join/LoginOk")
 public class LoginOk extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String name, id, pw, phone1, phone2, phone3, gender;
+	private String id, pw;
 	private String query;
 	private Connection conn;
 	private Statement stmt;
@@ -55,7 +58,7 @@ public class LoginOk extends HttpServlet {
 		id = request.getParameter("id");
 		pw = request.getParameter("pw");
 
-		query = "select pw from member where id = '" + id + "'";
+		query = "select * from member where id = '" + id + "'";
 		
 		try {
 			String driver = "oracle.jdbc.driver.OracleDriver";
@@ -67,20 +70,27 @@ public class LoginOk extends HttpServlet {
 			Connection conn = DriverManager.getConnection(url, user, passwd);
 
 			stmt = conn.createStatement();
-			int iResult = stmt.executeUpdate(query);
-			
-			if( iResult == 1 ) {
-				System.out.println("화원가입 완료");
-				System.out.println("id : " + id + "| pw : " + pw + "| name : " + name);
-				response.sendRedirect("joinResult.jsp");
+			ResultSet rs = null;
+			rs = stmt.executeQuery(query);
+
+			if(rs.next()) {
+			    String dbPw = rs.getString("PW");
+			    if(pw.equals(dbPw)) {
+			    	System.out.println("login success");
+		            HttpSession session = request.getSession();
+		            // 세션에 값을 저장하여 전달
+		            session.setAttribute("id", id);
+		            session.setAttribute("pw", pw);
+			    	response.sendRedirect("loginResult.jsp");
+			    }
 			} else {
-				System.out.println("insert fail");
-				response.sendRedirect("join.html");
+				System.out.println("login fail");
+				response.sendRedirect("login.html");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("join.html");
+			response.sendRedirect("login.html");
 		} finally {
 			try {
 				if(stmt != null) stmt.close();

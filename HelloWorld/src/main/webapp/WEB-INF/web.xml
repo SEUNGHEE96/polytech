@@ -108,8 +108,10 @@
     <servlet-name>ModifyOk</servlet-name>
     <servlet-class>join.ModifyOk</servlet-class>
   </servlet>
+  <!-- 
   <servlet-mapping>
     <servlet-name>ModifyOk</servlet-name>
     <url-pattern>/ModifyOk</url-pattern>
   </servlet-mapping>
+   -->
 </web-app>
