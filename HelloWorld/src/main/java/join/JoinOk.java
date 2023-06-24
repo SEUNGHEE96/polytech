@@ -71,9 +71,9 @@ public class JoinOk extends HttpServlet {
 
 		try {
 			String driver = "oracle.jdbc.driver.OracleDriver";
-			String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink13";
-			String user = "c##scott";
-			String passwd = "tiger";
+			String url = "jdbc:oracle:thin:@dinkdb_high?TNS_ADMIN=C:/SQLDEV/Wallet_DinkDB";
+			String user = "DA2313";
+			String passwd = "Data2313";
 
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, passwd);

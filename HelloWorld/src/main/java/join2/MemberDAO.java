@@ -1,8 +1,11 @@
 package join2;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -16,10 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class MemberDAO {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink13";
-	String user = "c##scott";
-	String passwd = "tiger";
+	private String name, id, pw, phone1, phone2, phone3, gender;
+	private String sql;
+	private Connection conn;
+	private Statement stmt;
 	DataSource ds = null;
 	
 	public MemberDAO() {
@@ -34,8 +37,6 @@ public class MemberDAO {
 	public ArrayList<MemberDTO> memberSelect() {
 		ArrayList<MemberDTO> dtos = new ArrayList<MemberDTO>();
 		
-		Connection conn = null;
-		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try {
@@ -70,35 +71,68 @@ public class MemberDAO {
 		return dtos;
 	}
 	
-	/*
-	public MemberDTO selectMember(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public int insertMember(MemberDTO dto) {
+		ArrayList<MemberDTO> dtos = new ArrayList<MemberDTO>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();			
+			String sql = "insert into member(id, pw, name, phone1, phone2, phone3, gender) values(?,?,?,?,?,?,?)";
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, dto.getId());
+			ps.setString(2, dto.getPw());
+			ps.setString(3, dto.getName());
+			ps.setString(4, dto.getPhone1());
+			ps.setString(5, dto.getPhone2());
+			ps.setString(6, dto.getPhone3());
+			ps.setString(7, dto.getGender());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				ps.close();
+			} catch (SQLException e) {
+			}
+		}
+		return result;
+	}
+	
+	public MemberDTO selectMember(String id, String pw) {
+		
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		MemberDTO dto = new MemberDTO();
-		int result = 0;
+		MemberDTO dto = null;
+		
 		try {
-			conn = DriverManager.getConnection(url, user, passwd);
-			String id = request.getParameter("id");
-			
+			conn = ds.getConnection();
 			String sql = "select * from member where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
-				String name = rs.getString("name");
-				String pw = rs.getString("pw");
-				String phone1 = rs.getString("phone1");
-				String phone2 = rs.getString("phone2");
-				String phone3 = rs.getString("phone3");
-				String gender = rs.getString("gender");
-				
-				dto = new MemberDTO(name, id, pw, phone1, phone2, phone3, gender);
+			if(rs.next()) {
+				String dbPw = rs.getString("PW");
+			    if(pw.equals(dbPw)) {
+					String name = rs.getString("name");
+					String phone1 = rs.getString("phone1");
+					String phone2 = rs.getString("phone2");
+					String phone3 = rs.getString("phone3");
+					String gender = rs.getString("gender");
+					dto = new MemberDTO(id, pw, name, phone1, phone2, phone3, gender);
+			    }
+		    } else {
+				System.out.println("login fail");
 			}
 		} catch(Exception e) {
-			
+			e.printStackTrace();
 		} finally {
 			try {
 				if(rs != null) rs.close();
@@ -110,62 +144,47 @@ public class MemberDAO {
 		}
 		return dto;
 	}
-	*/
 	
-	/*
-	public MemberDTO updateMember(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-
-		HttpSession session = request.getSession();
-
-		String id = (String) session.getAttribute("id");
-		String name = request.getParameter("name");
-		String pw = request.getParameter("pw");
-		String phone1 = request.getParameter("phone1");
-		String phone2 = request.getParameter("phone2");
-		String phone3 = request.getParameter("phone3");
-		String gender = request.getParameter("gender");
-
-		String query = "UPDATE MEMBER "
-				+ "SET "
-				+ "PW = '" + pw + "',"
-				+ "NAME = '" + name + "',"
-				+ "PHONE1 =  '" + phone1 + "',"
-				+ "PHONE2 =  '" + phone2 + "',"
-				+ "PHONE3 =  '" + phone3 + "',"
-				+ "GENDER =  '" + gender + "' "
-				+ "WHERE "
-				+ "ID = '" + id + "'";
+	public MemberDTO updateMember(MemberDTO dto) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		MemberDTO updateDto = null;
+		int result = 0;
+		
 		try {
-			String driver = "oracle.jdbc.driver.OracleDriver";
-			String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink13";
-			String user = "c##scott";
-			String passwd = "tiger";
-
-			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, passwd);
-
-			stmt = conn.createStatement();
-			int iResult = stmt.executeUpdate(query);
-
-			if (iResult == 1) {
+			conn = ds.getConnection();
+			String sql = "UPDATE MEMBER "
+					+ "SET "
+					+ "PW = ?,"
+					+ "NAME = ?,"
+					+ "PHONE1 = ?,"
+					+ "PHONE2 = ?,"
+					+ "PHONE3 = ?,"
+					+ "GENDER = ? "
+					+ "WHERE "
+					+ "ID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getPw());
+			ps.setString(2, dto.getName());
+			ps.setString(3, dto.getPhone1());
+			ps.setString(4, dto.getPhone2());
+			ps.setString(5, dto.getPhone3());
+			ps.setString(6, dto.getGender());
+			ps.setString(7, dto.getId());
+			result = ps.executeUpdate();
+			
+			if (result == 1) {
 				System.out.println("update success");
-	            session.setAttribute("pw", pw);
-	            session.setAttribute("name", name);
-	            session.setAttribute("phone1", phone1);
-	            session.setAttribute("phone2", phone2);
-	            session.setAttribute("phone3", phone3);
-	            session.setAttribute("gender", gender);
-				response.sendRedirect("modifyResult.jsp");
+				updateDto = new MemberDTO(id, pw, name, phone1, phone2, phone3, gender);
+				//response.sendRedirect("modifyResult.jsp");
 			} else {
 				System.out.println("update fail");
-				response.sendRedirect("modify.jsp");
+				//response.sendRedirect("modify.jsp");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("login.html");
 		} finally {
 			try {
 				if (stmt != null)
@@ -176,6 +195,6 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
+		return updateDto;
 	}
-	 */
 }

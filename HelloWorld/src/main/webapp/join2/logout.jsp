@@ -4,16 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<%
-	String id = (String)session.getAttribute("id");
-	session.removeAttribute(id);
+	//String id = (String)session.getAttribute("id");
+	session.removeAttribute("id");
+	session.removeAttribute("pw");
 
 	Enumeration<String> e = session.getAttributeNames();
-	
 	while(e.hasMoreElements()) {
 		String name = e.nextElement().toString();
 		String value = session.getAttribute(name).toString();
@@ -23,6 +23,8 @@
 	}
 	%>
 	로그아웃 되었습니다.
-	<a href="login.html">다시 로그인하러가기</a>
+	<br/>
+	<a href="main.jsp">메인페이지</a>
+	<a href="login.jsp">다시로그인</a>
 </body>
 </html>
