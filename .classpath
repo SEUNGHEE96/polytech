@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="library/src/|jdbc2/src/main/java/|jdbc/src/main/java/|solution/src/|HelloWorld/src/main/java/" kind="src" path=""/>
+	<classpathentry kind="src" path="HelloWorld/src/main/java"/>
+	<classpathentry kind="src" path="jdbc/src/main/java"/>
+	<classpathentry kind="src" path="jdbc2/src/main/java"/>
+	<classpathentry kind="src" path="library/src"/>
+	<classpathentry kind="src" path="solution/src"/>
+	<classpathentry kind="output" path="javaClass/bin"/>
+</classpath>

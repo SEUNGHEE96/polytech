@@ -16,6 +16,10 @@
 		paswd = request.getParameter("paswd");
 	%>
 	
+	${pageScope.id }
+	${requestScope.id }
+	${sessionScope.id }
+	${applicationScope.id }
 	<h1>forward.jsp 입니다.</h1>
 	아이디 : <%= id %> 입니다. <br/>
 	비밀번호 : <%= paswd %> 입니다. <br/>
