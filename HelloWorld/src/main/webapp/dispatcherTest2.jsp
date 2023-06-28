@@ -1,4 +1,3 @@
-<%@ page isErrorPage="true" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -9,9 +8,13 @@
 </head>
 <body>
 	<%
-	response.setStatus(200);
+		String id = (String)request.getAttribute("id");
+		String pw = (String)request.getAttribute("pw");
+	
 	%>
 	
-	<%= exception.getMessage() %>
+		<%=id %>
+		<%=pw %>
+	
 </body>
 </html>

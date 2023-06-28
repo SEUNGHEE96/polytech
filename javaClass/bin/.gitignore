@@ -2,9 +2,9 @@
 /.idea/
 /.project
 /HelloWorld/
-/Main.class
 /README.md
 /app/
+/assignment/
 /console/
 /controller/
 /dao/
@@ -20,6 +20,7 @@
 /join2/
 /library/
 /message/
+/mvc_board/
 /poly_web/
 /save/
 /service/
@@ -28,3 +29,4 @@
 /test/
 /thread/
 /view/
+/Main.class

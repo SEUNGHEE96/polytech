@@ -1,4 +1,4 @@
-package join;
+package dto;
 
 public class UsersDTO {
 	private String id;

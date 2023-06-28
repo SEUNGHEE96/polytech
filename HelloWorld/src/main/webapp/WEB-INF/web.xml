@@ -84,34 +84,28 @@
     <servlet-name>JoinOk</servlet-name>
     <servlet-class>join.JoinOk</servlet-class>
   </servlet>
-  <!-- 
-  <servlet-mapping>
-    <servlet-name>JoinOk</servlet-name>
-    <url-pattern>/JoinOk</url-pattern>
-  </servlet-mapping>
-   -->
   <servlet>
     <description></description>
     <display-name>LoginOk</display-name>
     <servlet-name>LoginOk</servlet-name>
     <servlet-class>join.LoginOk</servlet-class>
   </servlet>
-  <!-- 
-  <servlet-mapping>
-    <servlet-name>LoginOk</servlet-name>
-    <url-pattern>/LoginOk</url-pattern>
-  </servlet-mapping>
-   -->
   <servlet>
     <description></description>
     <display-name>ModifyOk</display-name>
     <servlet-name>ModifyOk</servlet-name>
     <servlet-class>join.ModifyOk</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <display-name>FrontCon</display-name>
+    <servlet-name>FrontCon</servlet-name>
+    <servlet-class>ex.FrontCon</servlet-class>
+  </servlet>
   <!-- 
   <servlet-mapping>
-    <servlet-name>ModifyOk</servlet-name>
-    <url-pattern>/ModifyOk</url-pattern>
+    <servlet-name>FrontCon</servlet-name>
+    <url-pattern>/FrontCon</url-pattern>
   </servlet-mapping>
    -->
 </web-app>

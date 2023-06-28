@@ -1,5 +1,5 @@
-<%@page import="join.UsersDTO"%>
-<%@page import="join.UsersDAO"%>
+<%@page import="dto.UsersDTO"%>
+<%@page import="dao.UsersDAO"%>
 <%@ page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
